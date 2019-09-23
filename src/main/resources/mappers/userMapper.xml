@@ -18,6 +18,7 @@
         select * from users
         where id &gt; #{p1} and id &lt; = (#{p1} + #{p2})
         order by id
+
     </select>
 
     <update id="updateUser" parameterType="User">

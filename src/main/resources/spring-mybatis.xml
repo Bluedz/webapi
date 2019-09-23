@@ -13,7 +13,11 @@
     <!--别名，就是将后面那一堆，用User代替-->
     <typeAliases>
         <typeAlias alias="User" type="com.xtk.apistation.webapi.bean.User"/>
-<!--        <typeAlias alias="TST_User" type="com.example.springboot.demo.bean.TST_User"/>-->
+        <typeAlias alias="MatBasicInformation" type="com.xtk.apistation.webapi.bean.MatBasicInformation"/>
+        <typeAlias alias="MatFactoryAttr" type="com.xtk.apistation.webapi.bean.MatFactoryAttr"/>
+        <typeAlias alias="MatAccounts" type="com.xtk.apistation.webapi.bean.MatAccounts"/>
+        <typeAlias alias="MatPurchasingStatus" type="com.xtk.apistation.webapi.bean.MatPurchasingStatus"/>
+        <typeAlias alias="MatRequestResult" type="com.xtk.apistation.webapi.bean.MatRequestResult"/>
     </typeAliases>
     <!--环境配置-->
     <environments default="development">
@@ -30,8 +34,11 @@
     </environments>
     <!--这个就是指定映射的xml，mapper xml中的SQL查询 都要对应java接口类里面的方法-->
     <mappers>
-        <mapper resource="mappers/userMapper.xml"/>
-
-<!--        <mapper resource="mappers/TST_UserMapper.xml"/>-->
+        <mapper resource="mappers/userMapper.xml" />
+        <mapper resource="mappers/MatBasicInformationMapper.xml" />
+        <mapper resource="mappers/MatFactoryAttrMapper.xml" />
+        <mapper resource="mappers/MatAccountsMapper.xml" />
+        <mapper resource="mappers/MatPurchasingStatusMapper.xml" />
+        <mapper resource="mappers/MatRequestResultMapper.xml" />
     </mappers>
 </configuration>

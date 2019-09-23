@@ -2,9 +2,9 @@ package com.xtk.apistation.webapi.controller;
 
 
 // import com.xtk.apistation.webapi.Mapper.TstUserMapper;
-import com.xtk.apistation.webapi.Mapper.UserMapper;
+import com.xtk.apistation.webapi.Mapper.*;
 // import com.xtk.apistation.webapi.bean.TST_User;
-import com.xtk.apistation.webapi.bean.User;
+import com.xtk.apistation.webapi.bean.*;
 import com.xtk.apistation.webapi.singleton.SingletonMybatis;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-// import com.example.springboot.demo.bean.ResponseResult;
+
 
 @RestController
 @RequestMapping("/index") //在类上使用RequestMapping，里面设置的value就是方法的父路径
@@ -31,39 +31,229 @@ public class Controller {
     //这里体现了restful风格的请求，按照请求的类型，来进行增删查改。
     //设计restful api（其实也就是URL），不要有冗余，例如不要写成getUsers，URL中
     //最好不要有动词。
-    @RequestMapping(method = RequestMethod.GET,value = "/users")
-    public List<User> getUsers(){
-        List<User> listUsers = null;
-        //获取一个连接
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-        try {
-            //得到映射器
-            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-            //调用接口中的方法去执行xml文件中的SQL语句
-           // listUsers = userMapper.getUsers();
-            //要提交后才会生效
-            sqlSession.commit();
-        }finally {
-            //最后记得关闭连接
-            sqlSession.close();
-        }
 
-        return listUsers;
-    }
-    //这里用的是路径变量，就是{}括起来的，会当做变量读进来
-    @RequestMapping(method = RequestMethod.GET,value = "/users/{userId}")
-    public User getUser(@PathVariable int userId){
-        User user;
+    //RequestBody这个注解可以接收json数据
+    // MatInfor -- 物料基本信息
+    @RequestMapping(method = RequestMethod.POST,value = "/MatInfor")
+    public ResponseResult getMatInfor(@RequestBody String name){
+        ResponseResult responseResult;
+        List<MatBasicInformation> listMatInfor = new ArrayList<>();
+        MatBasicInformation matInfor;
+
         SqlSession sqlSession = sqlSessionFactory.openSession();
+
         try {
-            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-            user = userMapper.getById(userId);
-            sqlSession.commit();
+            MatBasicInformationMapper matInforMapper = sqlSession.getMapper(MatBasicInformationMapper.class);
+            JSONObject jsonObject = JSON.parseObject(name);
+            int SerialNumber = jsonObject.getInteger("SerialNumber");
+            int MaxCount = jsonObject.getInteger("MaxCount");
+            if (jsonObject.get("SpecifiedNumber") == null) {
+                System.out.println("SpecifiedNumber is null");
+                // 返回增量
+                listMatInfor = matInforMapper.getMats(SerialNumber, MaxCount);
+            }else{
+                int SpecifiedNumber = jsonObject.getInteger("SpecifiedNumber");
+                // 返回特定
+                matInfor = matInforMapper.getMatsBySNId(SpecifiedNumber);
+                listMatInfor.add(matInfor);
+            }
+            responseResult=ResponseResult.success(listMatInfor);
+//          sqlSession.commit();
         }finally {
             sqlSession.close();
         }
-        return user;
+        // return true;
+        // responseResult=ResponseResult.success(listMatInfor);
+        //
+        // responseResult=ResponseResult.fail("no");
+        System.out.println(responseResult.msg);
+        System.out.println(responseResult.success);
+        return responseResult;
     }
+
+    // MatFactoryAttr -- 物料工厂属性
+    @RequestMapping(method = RequestMethod.POST,value = "/MatFactoryAttr")
+    public ResponseResult getMFA(@RequestBody String name){
+        ResponseResult responseResult;
+        List<MatFactoryAttr> listMatFactoryAttr = new ArrayList<>();
+        MatFactoryAttr matFactoryAttr;
+
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        try {
+            MatFactoryAttrMapper matFactoryAttrMapper = sqlSession.getMapper(MatFactoryAttrMapper.class);
+            JSONObject jsonObject = JSON.parseObject(name);
+            int SerialNumber = jsonObject.getInteger("SerialNumber");
+            int MaxCount = jsonObject.getInteger("MaxCount");
+            if (jsonObject.get("SpecifiedNumber") == null) {
+                System.out.println("SpecifiedNumber is null");
+                // 返回增量
+                listMatFactoryAttr = matFactoryAttrMapper.getMFAs(SerialNumber, MaxCount);
+            }else{
+                int SpecifiedNumber = jsonObject.getInteger("SpecifiedNumber");
+                // 返回特定
+                matFactoryAttr = matFactoryAttrMapper.getMFABySNId(SpecifiedNumber);
+                listMatFactoryAttr.add(matFactoryAttr);
+            }
+            responseResult=ResponseResult.success(listMatFactoryAttr);
+//          sqlSession.commit();
+        }finally {
+            sqlSession.close();
+        }
+        // return true;
+        // responseResult=ResponseResult.success(listMatInfor);
+        //
+        // responseResult=ResponseResult.fail("no");
+        System.out.println(responseResult.msg);
+        System.out.println(responseResult.success);
+        return responseResult;
+    }
+
+    // MatAccounts -- 物料台账
+    @RequestMapping(method = RequestMethod.POST,value = "/MatAccounts")
+    public ResponseResult getMA(@RequestBody String name){
+        ResponseResult responseResult;
+        List<MatAccounts> listMatAccounts = new ArrayList<>();
+        MatAccounts matAccounts;
+
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        try {
+            MatAccountsMapper matFactoryAttrMapper = sqlSession.getMapper(MatAccountsMapper.class);
+            JSONObject jsonObject = JSON.parseObject(name);
+            int SerialNumber = jsonObject.getInteger("SerialNumber");
+            int MaxCount = jsonObject.getInteger("MaxCount");
+            if (jsonObject.get("SpecifiedNumber") == null) {
+                System.out.println("SpecifiedNumber is null");
+                // 返回增量
+                listMatAccounts = matFactoryAttrMapper.getMAs(SerialNumber, MaxCount);
+            }else{
+                int SpecifiedNumber = jsonObject.getInteger("SpecifiedNumber");
+                // 返回特定
+                matAccounts = matFactoryAttrMapper.getMABySNId(SpecifiedNumber);
+                listMatAccounts.add(matAccounts);
+            }
+            responseResult=ResponseResult.success(listMatAccounts);
+//          sqlSession.commit();
+        }finally {
+            sqlSession.close();
+        }
+        // return true;
+        // responseResult=ResponseResult.success(listMatInfor);
+        //
+        // responseResult=ResponseResult.fail("no");
+        System.out.println(responseResult.msg);
+        System.out.println(responseResult.success);
+        return responseResult;
+    }
+
+    // MatPurchasingStatus -- 物料申购单数据
+    @RequestMapping(method = RequestMethod.POST,value = "/MatPurchasingStatus")
+    public ResponseResult getMPS(@RequestBody String name){
+        ResponseResult responseResult;
+        List<MatPurchasingStatus> listMatPurchasingStatus = new ArrayList<>();
+        MatPurchasingStatus matPurchasingStatus;
+
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        try {
+            MatPurchasingStatusMapper matPurchasingStatusMapper = sqlSession.getMapper(MatPurchasingStatusMapper.class);
+            JSONObject jsonObject = JSON.parseObject(name);
+            int SerialNumber = jsonObject.getInteger("SerialNumber");
+            int MaxCount = jsonObject.getInteger("MaxCount");
+            if (jsonObject.get("SpecifiedNumber") == null) {
+                System.out.println("SpecifiedNumber is null");
+                // 返回增量
+                listMatPurchasingStatus = matPurchasingStatusMapper.getMPSs(SerialNumber, MaxCount);
+            }else{
+                int SpecifiedNumber = jsonObject.getInteger("SpecifiedNumber");
+                // 返回特定
+                matPurchasingStatus = matPurchasingStatusMapper.getMPSBySNId(SpecifiedNumber);
+                listMatPurchasingStatus.add(matPurchasingStatus);
+            }
+            responseResult=ResponseResult.success(listMatPurchasingStatus);
+//          sqlSession.commit();
+        }finally {
+            sqlSession.close();
+        }
+        // return true;
+        // responseResult=ResponseResult.success(listMatInfor);
+        //
+        // responseResult=ResponseResult.fail("no");
+        System.out.println(responseResult.msg);
+        System.out.println(responseResult.success);
+        return responseResult;
+    }
+
+    // MatRequestResult -- 物料领用结果反馈数据
+    @RequestMapping(method = RequestMethod.POST,value = "/MatRequestResult")
+    public ResponseResult getMRR(@RequestBody String name){
+        ResponseResult responseResult;
+        List<MatRequestResult> listMatRequestResult = new ArrayList<>();
+        MatRequestResult matRequestResult;
+
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        try {
+            MatRequestResultMapper matRequestResultMapper = sqlSession.getMapper(MatRequestResultMapper.class);
+            JSONObject jsonObject = JSON.parseObject(name);
+            int SerialNumber = jsonObject.getInteger("SerialNumber");
+            int MaxCount = jsonObject.getInteger("MaxCount");
+            if (jsonObject.get("SpecifiedNumber") == null) {
+                System.out.println("SpecifiedNumber is null");
+                // 返回增量
+                listMatRequestResult = matRequestResultMapper.getMRRs(SerialNumber, MaxCount);
+            }else{
+                int SpecifiedNumber = jsonObject.getInteger("SpecifiedNumber");
+                // 返回特定
+                matRequestResult = matRequestResultMapper.getMRRBySNId(SpecifiedNumber);
+                listMatRequestResult.add(matRequestResult);
+            }
+            responseResult=ResponseResult.success(listMatRequestResult);
+//          sqlSession.commit();
+        }finally {
+            sqlSession.close();
+        }
+        // return true;
+        // responseResult=ResponseResult.success(listMatInfor);
+        //
+        // responseResult=ResponseResult.fail("no");
+        System.out.println(responseResult.msg);
+        System.out.println(responseResult.success);
+        return responseResult;
+    }
+
+    //RequestBody这个注解可以接收json数据
+//    @RequestMapping(method = RequestMethod.POST,value = "/postest")
+//    public List<User> postTest(@RequestBody String name){
+//        List<User> listUsers = new ArrayList<>();
+//        User user;
+//
+//        SqlSession sqlSession = sqlSessionFactory.openSession();
+//
+//        try {
+//            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+//            JSONObject jsonObject = JSON.parseObject(name);
+//            int SerialNumber = jsonObject.getInteger("SerialNumber");
+//            int MaxCount = jsonObject.getInteger("MaxCount");
+//            if (jsonObject.get("SpecifiedNumber") == null) {
+//                System.out.println("SpecifiedNumber is null");
+//                // 返回增量
+//                listUsers = userMapper.getUsers(SerialNumber, MaxCount);
+//            }else{
+//                int SpecifiedNumber = jsonObject.getInteger("SpecifiedNumber");
+//                // 返回特定
+//                user = userMapper.getById(SpecifiedNumber);
+//                listUsers.add(user);
+//            }
+////          sqlSession.commit();
+//        }finally {
+//            sqlSession.close();
+//        }
+//       // return true;
+//
+//        return listUsers;
+//    }
 
     // ---
 //    @RequestMapping(method = RequestMethod.GET,value = "/TST_users/{userId}")
@@ -95,35 +285,38 @@ public class Controller {
 //    }
     // ---
 
-    //RequestBody这个注解可以接收json数据
-    @RequestMapping(method = RequestMethod.POST,value = "/postest")
-    public List<User> postTest(@RequestBody String name){
-        List<User> listUsers = new ArrayList<>();
-        User user;
-
+    @RequestMapping(method = RequestMethod.GET,value = "/users")
+    public List<User> getUsers(){
+        List<User> listUsers = null;
+        //获取一个连接
         SqlSession sqlSession = sqlSessionFactory.openSession();
+        try {
+            //得到映射器
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            //调用接口中的方法去执行xml文件中的SQL语句
+            // listUsers = userMapper.getUsers();
+            //要提交后才会生效
+            sqlSession.commit();
+        }finally {
+            //最后记得关闭连接
+            sqlSession.close();
+        }
 
+        return listUsers;
+    }
+    //这里用的是路径变量，就是{}括起来的，会当做变量读进来
+    @RequestMapping(method = RequestMethod.GET,value = "/users/{userId}")
+    public User getUser(@PathVariable int userId){
+        User user;
+        SqlSession sqlSession = sqlSessionFactory.openSession();
         try {
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-            JSONObject jsonObject = JSON.parseObject(name);
-            int SerialNumber = jsonObject.getInteger("SerialNumber");
-            int MaxCount = jsonObject.getInteger("MaxCount");
-            if (jsonObject.get("SpecifiedNumber") == null) {
-                System.out.println("SpecifiedNumber is null");
-                // 返回增量
-                listUsers = userMapper.getUsers(SerialNumber, MaxCount);
-            }else{
-                int SpecifiedNumber = jsonObject.getInteger("SpecifiedNumber");
-                // 返回特定
-                user = userMapper.getById(SpecifiedNumber);
-                listUsers.add(user);
-            }
-//          sqlSession.commit();
+            user = userMapper.getById(userId);
+            sqlSession.commit();
         }finally {
             sqlSession.close();
         }
-       // return true;
-        return listUsers;
+        return user;
     }
 
     //RequestBody这个注解可以接收json数据

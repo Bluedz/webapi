@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtk.apistation.webapi.Mapper.MatBasicInformationMapper">
+  <resultMap id="BaseResultMap" type="com.xtk.apistation.webapi.bean.MatBasicInformation">
+    <id column="TID" jdbcType="DECIMAL" property="tid" />
+    <result column="SERIAL_NUMBER" jdbcType="DECIMAL" property="serialNumber" />
+    <result column="MID" jdbcType="VARCHAR" property="mid" />
+    <result column="ATTACHMENT_NAME" jdbcType="VARCHAR" property="attachmentName" />
+    <result column="TYPE" jdbcType="VARCHAR" property="type" />
+    <result column="KEY_MATERIAL" jdbcType="VARCHAR" property="keyMaterial" />
+    <result column="REPLACE_MATERIAL_NUM" jdbcType="VARCHAR" property="replaceMaterialNum" />
+    <result column="ENTERPRISE_NAME" jdbcType="VARCHAR" property="enterpriseName" />
+    <result column="PURCHASE_CYCLE" jdbcType="DECIMAL" property="purchaseCycle" />
+    <result column="UNIT_PRICE" jdbcType="DECIMAL" property="unitPrice" />
+    <result column="PURCHASE_ID" jdbcType="VARCHAR" property="purchaseId" />
+    <result column="LOCAL" jdbcType="VARCHAR" property="local" />
+    <result column="IS_REPARABLE" jdbcType="VARCHAR" property="isReparable" />
+    <result column="UNIT" jdbcType="VARCHAR" property="unit" />
+    <result column="IS_INCREASE" jdbcType="VARCHAR" property="isIncrease" />
+  </resultMap>
+  <select id="getMats"  resultType="MatBasicInformation" resultMap="BaseResultMap">
+        select * from MAT_BASIC_INFORMATION
+        where SERIAL_NUMBER &gt; #{p1} and SERIAL_NUMBER &lt; = (#{p1} + #{p2})
+        order by TID
+    </select>
+  <select id="getMatsBySNId" parameterType="int" resultType="MatBasicInformation" resultMap="BaseResultMap">
+        select * from MAT_BASIC_INFORMATION where SERIAL_NUMBER = #{sn}
+    </select>
+  <insert id="insert" parameterType="com.xtk.apistation.webapi.bean.MatBasicInformation">
+    insert into WEBAPI.MAT_BASIC_INFORMATION (TID, SERIAL_NUMBER, MID,
+      ATTACHMENT_NAME, `TYPE`, KEY_MATERIAL,
+      REPLACE_MATERIAL_NUM, ENTERPRISE_NAME, PURCHASE_CYCLE,
+      UNIT_PRICE, PURCHASE_ID, `LOCAL`,
+      IS_REPARABLE, UNIT, IS_INCREASE
+      )
+    values (#{tid,jdbcType=DECIMAL}, #{serialNumber,jdbcType=DECIMAL}, #{mid,jdbcType=VARCHAR},
+      #{attachmentName,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{keyMaterial,jdbcType=VARCHAR},
+      #{replaceMaterialNum,jdbcType=VARCHAR}, #{enterpriseName,jdbcType=VARCHAR}, #{purchaseCycle,jdbcType=DECIMAL},
+      #{unitPrice,jdbcType=DECIMAL}, #{purchaseId,jdbcType=VARCHAR}, #{local,jdbcType=VARCHAR},
+      #{isReparable,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{isIncrease,jdbcType=VARCHAR}
+      )
+  </insert>
+</mapper>
