@@ -18,7 +18,7 @@ public class MatAccounts implements Serializable {
 
     private String location;
 
-    private String state;
+    private BigDecimal state;
 
     private BigDecimal unumber;
 
@@ -74,11 +74,11 @@ public class MatAccounts implements Serializable {
         this.location = location;
     }
 
-    public String getState() {
+    public BigDecimal getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(BigDecimal state) {
         this.state = state;
     }
 

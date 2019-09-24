@@ -7,7 +7,7 @@
     <result column="MATERIAL_NUMBER" jdbcType="VARCHAR" property="materialNumber" />
     <result column="BATCH_NUMBER" jdbcType="VARCHAR" property="batchNumber" />
     <result column="LOCATION" jdbcType="VARCHAR" property="location" />
-    <result column="STATE" jdbcType="VARCHAR" property="state" />
+    <result column="STATE" jdbcType="DECIMAL" property="state" />
     <result column="UNUMBER" jdbcType="DECIMAL" property="unumber" />
     <result column="UNIT_PRICE" jdbcType="DECIMAL" property="unitPrice" />
     <result column="TIME" jdbcType="VARCHAR" property="time" />
