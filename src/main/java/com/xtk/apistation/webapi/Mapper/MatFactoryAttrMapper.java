@@ -7,8 +7,9 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface MatFactoryAttrMapper {
-    List<MatFactoryAttr> getMFAs(int p1, int p2);
+    public List<MatFactoryAttr> getMFAs(int p1, int p2);
     public MatFactoryAttr getMFABySNId(int sn);
+    public boolean insert(MatFactoryAttr record);
 /*    long countByExample(MatFactoryAttrExample example);
 
     int deleteByExample(MatFactoryAttrExample example);

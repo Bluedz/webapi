@@ -18,6 +18,12 @@
   <select id="getMFABySNId" parameterType="int" resultType="MatFactoryAttr" resultMap="BaseResultMap">
         select * from MAT_FACTORY_ATTR where SERIAL_NUMBER = #{sn}
     </select>
+  <insert id="insert" parameterType="com.xtk.apistation.webapi.bean.MatFactoryAttr">
+    insert into WEBAPI.MAT_FACTORY_ATTR (TID, SERIAL_NUMBER, MATERIAL_NUMBER,
+      AREA, STOCK_MAX, STOCK_MIN,
+      QUALITY_ASSURANCE)
+    values (MAT_FACTORY_ATTR_ID.nextval, (select Max(SERIAL_NUMBER)+1 from MAT_FACTORY_ATTR), #{materialNumber,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{stockMax,jdbcType=DECIMAL}, #{stockMin,jdbcType=DECIMAL}, #{qualityAssurance,jdbcType=DECIMAL})
+  </insert>
 <!--
   <sql id="Example_Where_Clause">
     <where>

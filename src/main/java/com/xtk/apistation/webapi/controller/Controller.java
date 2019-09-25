@@ -11,14 +11,13 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
+import com.xtk.apistation.webapi.service.createOrderFileToREP;
 
 @RestController
 @RequestMapping("/index") //在类上使用RequestMapping，里面设置的value就是方法的父路径
@@ -233,7 +232,7 @@ public class Controller {
         System.out.println(name);
 
         String fName = "MatOrder";
-        ResponseResult responseResult = null;
+        ResponseResult responseResult;
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
         JSONObject jsonObject = JSON.parseObject(name);
@@ -247,62 +246,47 @@ public class Controller {
                 jsonObject.getString("cosCenter") + "@" +
                 jsonObject.getString("zChart") + "@" +
                 jsonObject.getString("subUser") + "@" +
-                jsonObject.getString("subDate") + "@";
+                jsonObject.getString("subDate") ;
         System.out.println(    jsonAllValue    );
-
-        creatOrderFileToErp(fName, jsonAllValue, reqId);
-
-        /*List<MatRequestResult> listMatRequestResult = new ArrayList<>();
-        MatRequestResult matRequestResult;
-
         try {
-            MatRequestResultMapper matRequestResultMapper = sqlSession.getMapper(MatRequestResultMapper.class);
-            JSONObject jsonObject = JSON.parseObject(name);
-            int SerialNumber = jsonObject.getInteger("SerialNumber");
-            int MaxCount = jsonObject.getInteger("MaxCount");
-            if (jsonObject.get("SpecifiedNumber") == null) {
-                System.out.println("SpecifiedNumber is null");
-                // 返回增量
-                listMatRequestResult = matRequestResultMapper.getMRRs(SerialNumber, MaxCount);
-            }else{
-                int SpecifiedNumber = jsonObject.getInteger("SpecifiedNumber");
-                // 返回特定
-                matRequestResult = matRequestResultMapper.getMRRBySNId(SpecifiedNumber);
-                listMatRequestResult.add(matRequestResult);
-            }
-            responseResult=ResponseResult.success(listMatRequestResult);
-//          sqlSession.commit();
-        }finally {
-            sqlSession.close();
-        }
+            createOrderFileToREP.createFile(fName, jsonAllValue);
+            responseResult=ResponseResult.success(null);
+        } finally {
 
-        System.out.println(responseResult.msg);
-        System.out.println(responseResult.success);*/
+        }
         return responseResult;
     }
 
-    public static void creatOrderFileToErp(String fileName, String str, String idCode) throws IOException {
-        // 生成的文件路径
-        // Random rdm = new Random(); rdm.nextInt(10000)
-        String path = "D:\\EXCHANGE\\" + "tst_" + fileName + "\\"
-                + fileName + "-" + "time" + "-" + idCode + ".txt";
-        File file = new File(path);
-        /* 创建目录 */
-        if (!file.exists()) {
-            file.getParentFile().mkdirs();
-        }
-        file.createNewFile();
-        // write 解决中文乱码问题
-        // FileWriter fw = new FileWriter(file, true);
-        OutputStreamWriter fw = new OutputStreamWriter(new FileOutputStream(file), "GB2312");
-        BufferedWriter bw = new BufferedWriter(fw);
-        bw.write(str);
-        bw.flush();
-        bw.close();
-        fw.close();
 
-    }
     // MatRequest -- 物料领用请求
+    @RequestMapping(method = RequestMethod.POST,value = "/MatRequest")
+    public ResponseResult setMatRequest(@RequestBody String name) throws IOException {
+        System.out.println(name);
+
+        String fName = "MatRequest";
+        ResponseResult responseResult;
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        JSONObject jsonObject = JSON.parseObject(name);
+        // BigDecimal x = jsonObject.getBigDecimal("qty");
+        String reqId = jsonObject.getString("reqId");
+        String jsonAllValue =
+                jsonObject.getString("reqId") + "@" +
+                        jsonObject.getString("itemId") + "@" +
+                        jsonObject.getString("area") + "@" +
+                        jsonObject.getString("cosCenter") + "@" +
+                        jsonObject.getBigDecimal("qty") + "@" +
+                        jsonObject.getString("subUser") + "@" +
+                        jsonObject.getString("subDate") ;
+        System.out.println(    jsonAllValue    );
+        try {
+            createOrderFileToREP.createFile(fName, jsonAllValue);
+            responseResult=ResponseResult.success(null);
+        } finally {
+
+        }
+        return responseResult;
+    }
 
     //RequestBody这个注解可以接收json数据
 //    @RequestMapping(method = RequestMethod.POST,value = "/postest")
