@@ -23,6 +23,18 @@
   <select id="getMABySNId" parameterType="int" resultType="MatAccounts" resultMap="BaseResultMap">
         select * from MAT_ACCOUNTS where SERIAL_NUMBER = #{sn}
     </select>
+  <insert id="insert" parameterType="com.xtk.apistation.webapi.bean.MatAccounts">
+    insert into WEBAPI.MAT_ACCOUNTS (TID, SERIAL_NUMBER, MATERIAL_NUMBER,
+      BATCH_NUMBER, LOCATION, STATE,
+      UNUMBER, UNIT_PRICE, TIME,
+      FACTORY, WORK_SHOP, REQUEST_ID
+      )
+    values (MAT_ACCOUNTS_ID.nextval, (select Max(SERIAL_NUMBER)+1 from MAT_ACCOUNTS), #{materialNumber,jdbcType=VARCHAR},
+      #{batchNumber,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR},
+      #{unumber,jdbcType=DECIMAL}, #{unitPrice,jdbcType=DECIMAL}, #{time,jdbcType=VARCHAR},
+      #{factory,jdbcType=VARCHAR}, #{workShop,jdbcType=VARCHAR}, #{requestId,jdbcType=VARCHAR}
+      )
+  </insert>
 <!--  <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

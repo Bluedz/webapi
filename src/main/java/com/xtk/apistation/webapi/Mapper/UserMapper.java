@@ -11,7 +11,7 @@ public interface UserMapper {
     // --
     // public TST_User getById2(int id);
     // --
-    public boolean insert(String name);
+    public boolean insert(User record);;
     public List<User> getUsers(int p1, int p2);
     public boolean updateUser(User user);
     public boolean deleteUser(int id);

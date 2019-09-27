@@ -16,6 +16,12 @@
   <select id="getMRRBySNId" parameterType="int" resultType="MatRequestResult" resultMap="BaseResultMap">
         select * from MAT_REQUEST_RESULT where SERIAL_NUMBER = #{sn}
     </select>
+    <insert id="insert" parameterType="com.xtk.apistation.webapi.bean.MatRequestResult">
+    insert into WEBAPI.MAT_REQUEST_RESULT (TID, SERIAL_NUMBER, CUST_PO,
+      CUST_RESULT, FEEDBACK_TIME)
+    values (MAT_REQUEST_RESULT_ID.nextval, (select Max(SERIAL_NUMBER)+1 from MAT_REQUEST_RESULT), #{custPo,jdbcType=VARCHAR},
+      #{custResult,jdbcType=VARCHAR}, #{feedbackTime,jdbcType=VARCHAR})
+  </insert>
 <!--  <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

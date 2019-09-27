@@ -28,12 +28,12 @@
     </select>
   <insert id="insert" parameterType="com.xtk.apistation.webapi.bean.MatBasicInformation">
     insert into WEBAPI.MAT_BASIC_INFORMATION (TID, SERIAL_NUMBER, MID,
-      ATTACHMENT_NAME, `TYPE`, KEY_MATERIAL,
+      ATTACHMENT_NAME, TYPE, KEY_MATERIAL,
       REPLACE_MATERIAL_NUM, ENTERPRISE_NAME, PURCHASE_CYCLE,
-      UNIT_PRICE, PURCHASE_ID, `LOCAL`,
+      UNIT_PRICE, PURCHASE_ID, LOCAL,
       IS_REPARABLE, UNIT, IS_INCREASE
       )
-    values (#{tid,jdbcType=DECIMAL}, #{serialNumber,jdbcType=DECIMAL}, #{mid,jdbcType=VARCHAR},
+    values (MAT_BASIC_INFORMATION_ID.nextval, (select Max(SERIAL_NUMBER)+1 from MAT_BASIC_INFORMATION), #{mid,jdbcType=VARCHAR},
       #{attachmentName,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{keyMaterial,jdbcType=VARCHAR},
       #{replaceMaterialNum,jdbcType=VARCHAR}, #{enterpriseName,jdbcType=VARCHAR}, #{purchaseCycle,jdbcType=DECIMAL},
       #{unitPrice,jdbcType=DECIMAL}, #{purchaseId,jdbcType=VARCHAR}, #{local,jdbcType=VARCHAR},

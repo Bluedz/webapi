@@ -7,8 +7,9 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface MatRequestResultMapper {
-    List<MatRequestResult> getMRRs(int p1, int p2);
+    public List<MatRequestResult> getMRRs(int p1, int p2);
     public MatRequestResult getMRRBySNId(int sn);
+    public boolean insert(MatRequestResult record);
     /*long countByExample(MatRequestResultExample example);
 
     int deleteByExample(MatRequestResultExample example);

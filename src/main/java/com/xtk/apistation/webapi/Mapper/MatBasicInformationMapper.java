@@ -8,8 +8,9 @@ import java.util.List;
 
 public interface MatBasicInformationMapper {
 
-    List<MatBasicInformation> getMats(int p1, int p2);
+    public List<MatBasicInformation> getMats(int p1, int p2);
     public MatBasicInformation getMatsBySNId(int sn);
+    public boolean insert(MatBasicInformation record);
 
 
 

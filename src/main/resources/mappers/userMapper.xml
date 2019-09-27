@@ -10,8 +10,8 @@
         select * from users where id = #{id}
     </select>
 
-    <insert id="insert" parameterType="string">
-        insert into users(name) values(#{name})
+    <insert id="insert" parameterType="com.xtk.apistation.webapi.bean.User">
+        insert into users(tid, id, name) values(TST_USERS_ID.nextval, #{id}, #{name, jdbcType=VARCHAR})
     </insert>
 
     <select id="getUsers"  resultType="User">

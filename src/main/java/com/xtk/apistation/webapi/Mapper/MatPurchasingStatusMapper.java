@@ -7,8 +7,9 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface MatPurchasingStatusMapper {
-    List<MatPurchasingStatus> getMPSs(int p1, int p2);
+    public List<MatPurchasingStatus> getMPSs(int p1, int p2);
     public MatPurchasingStatus getMPSBySNId(int sn);
+    public boolean insert(MatPurchasingStatus record);
 
     /*long countByExample(MatPurchasingStatusExample example);
 

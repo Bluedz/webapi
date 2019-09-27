@@ -7,8 +7,9 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface MatAccountsMapper {
-    List<MatAccounts> getMAs(int p1, int p2);
+    public List<MatAccounts> getMAs(int p1, int p2);
     public MatAccounts getMABySNId(int sn);
+    public boolean insert(MatAccounts record);
 /*    long countByExample(MatAccountsExample example);
 
     int deleteByExample(MatAccountsExample example);

@@ -390,7 +390,7 @@ public class Controller {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         try {
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-            userMapper.insert(name);
+            // userMapper.insert(name);
             sqlSession.commit();
         }finally {
             sqlSession.close();
