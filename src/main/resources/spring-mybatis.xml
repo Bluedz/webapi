@@ -18,6 +18,7 @@
         <typeAlias alias="MatAccounts" type="com.xtk.apistation.webapi.bean.MatAccounts"/>
         <typeAlias alias="MatPurchasingStatus" type="com.xtk.apistation.webapi.bean.MatPurchasingStatus"/>
         <typeAlias alias="MatRequestResult" type="com.xtk.apistation.webapi.bean.MatRequestResult"/>
+        <typeAlias alias="LogOfImport" type="com.xtk.apistation.webapi.bean.LogOfImport"/>
     </typeAliases>
     <!--环境配置-->
     <environments default="development">

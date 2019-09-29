@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtk.apistation.webapi.Mapper.LogOfImportMapper">
+  <resultMap id="BaseResultMap" type="com.xtk.apistation.webapi.bean.LogOfImport">
+    <result column="TID" jdbcType="DECIMAL" property="tid" />
+    <result column="IMPORT_TIME" jdbcType="TIMESTAMP" property="importTime" />
+    <result column="NAME_OF_INTERFACE" jdbcType="VARCHAR" property="nameOfInterface" />
+    <result column="NAME_OF_TXTFILE" jdbcType="VARCHAR" property="nameOfTxtfile" />
+    <result column="NUMBER_OF_LINE" jdbcType="DECIMAL" property="numberOfLine" />
+    <result column="CONTENT_OF_ONELINE" jdbcType="VARCHAR" property="contentOfOneline" />
+    <result column="RESULT_OF_IMPORT" jdbcType="VARCHAR" property="resultOfImport" />
+    <result column="ERROR_MESSAGE" jdbcType="VARCHAR" property="errorMessage" />
+  </resultMap>
+  <insert id="insert" parameterType="com.xtk.apistation.webapi.bean.LogOfImport">
+    insert into WEBAPI.LOG_OF_IMPORT (TID, IMPORT_TIME, NAME_OF_INTERFACE,
+      NAME_OF_TXTFILE, NUMBER_OF_LINE, CONTENT_OF_ONELINE,
+      RESULT_OF_IMPORT, ERROR_MESSAGE)
+    values (LOG_OF_IMPORT_ID.nextval, #{importTime,jdbcType=TIMESTAMP}, #{nameOfInterface,jdbcType=VARCHAR},
+      #{nameOfTxtfile,jdbcType=VARCHAR}, #{numberOfLine,jdbcType=DECIMAL}, #{contentOfOneline,jdbcType=VARCHAR},
+      #{resultOfImport,jdbcType=VARCHAR}, #{errorMessage,jdbcType=VARCHAR})
+  </insert>
+<!--  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    TID, IMPORT_TIME, NAME_OF_INTERFACE, NAME_OF_TXTFILE, NUMBER_OF_LINE, CONTENT_OF_ONELINE, 
+    RESULT_OF_IMPORT, ERROR_MESSAGE
+  </sql>
+  <select id="selectByExample" parameterType="generator.LogOfImportExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from WEBAPI.LOG_OF_IMPORT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="generator.LogOfImportExample">
+    delete from WEBAPI.LOG_OF_IMPORT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+
+  <insert id="insertSelective" parameterType="com.xtk.apistation.webapi.bean.LogOfImport">
+    insert into WEBAPI.LOG_OF_IMPORT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tid != null">
+        TID,
+      </if>
+      <if test="importTime != null">
+        IMPORT_TIME,
+      </if>
+      <if test="nameOfInterface != null">
+        NAME_OF_INTERFACE,
+      </if>
+      <if test="nameOfTxtfile != null">
+        NAME_OF_TXTFILE,
+      </if>
+      <if test="numberOfLine != null">
+        NUMBER_OF_LINE,
+      </if>
+      <if test="contentOfOneline != null">
+        CONTENT_OF_ONELINE,
+      </if>
+      <if test="resultOfImport != null">
+        RESULT_OF_IMPORT,
+      </if>
+      <if test="errorMessage != null">
+        ERROR_MESSAGE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tid != null">
+        #{tid,jdbcType=DECIMAL},
+      </if>
+      <if test="importTime != null">
+        #{importTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nameOfInterface != null">
+        #{nameOfInterface,jdbcType=VARCHAR},
+      </if>
+      <if test="nameOfTxtfile != null">
+        #{nameOfTxtfile,jdbcType=VARCHAR},
+      </if>
+      <if test="numberOfLine != null">
+        #{numberOfLine,jdbcType=DECIMAL},
+      </if>
+      <if test="contentOfOneline != null">
+        #{contentOfOneline,jdbcType=VARCHAR},
+      </if>
+      <if test="resultOfImport != null">
+        #{resultOfImport,jdbcType=VARCHAR},
+      </if>
+      <if test="errorMessage != null">
+        #{errorMessage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="generator.LogOfImportExample" resultType="java.lang.Long">
+    select count(*) from WEBAPI.LOG_OF_IMPORT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update WEBAPI.LOG_OF_IMPORT
+    <set>
+      <if test="record.tid != null">
+        TID = #{record.tid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.importTime != null">
+        IMPORT_TIME = #{record.importTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.nameOfInterface != null">
+        NAME_OF_INTERFACE = #{record.nameOfInterface,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nameOfTxtfile != null">
+        NAME_OF_TXTFILE = #{record.nameOfTxtfile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.numberOfLine != null">
+        NUMBER_OF_LINE = #{record.numberOfLine,jdbcType=DECIMAL},
+      </if>
+      <if test="record.contentOfOneline != null">
+        CONTENT_OF_ONELINE = #{record.contentOfOneline,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resultOfImport != null">
+        RESULT_OF_IMPORT = #{record.resultOfImport,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errorMessage != null">
+        ERROR_MESSAGE = #{record.errorMessage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update WEBAPI.LOG_OF_IMPORT
+    set TID = #{record.tid,jdbcType=DECIMAL},
+      IMPORT_TIME = #{record.importTime,jdbcType=TIMESTAMP},
+      NAME_OF_INTERFACE = #{record.nameOfInterface,jdbcType=VARCHAR},
+      NAME_OF_TXTFILE = #{record.nameOfTxtfile,jdbcType=VARCHAR},
+      NUMBER_OF_LINE = #{record.numberOfLine,jdbcType=DECIMAL},
+      CONTENT_OF_ONELINE = #{record.contentOfOneline,jdbcType=VARCHAR},
+      RESULT_OF_IMPORT = #{record.resultOfImport,jdbcType=VARCHAR},
+      ERROR_MESSAGE = #{record.errorMessage,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>-->
+</mapper>

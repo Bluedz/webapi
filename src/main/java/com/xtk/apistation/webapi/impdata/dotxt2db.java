@@ -1,8 +1,15 @@
 package com.xtk.apistation.webapi.impdata;
 
+import org.slf4j.ILoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 
 public class dotxt2db<main> {
+    // def log
+    private  Logger logger = LoggerFactory.getLogger(this.getClass());
+
     // init
     private static String[] folderList = { "MatAccounts" };
     private  static String root = "D:\\test\\";
@@ -18,7 +25,7 @@ public class dotxt2db<main> {
         return str;
     }
 
-    private static void doIt(String folder) throws Exception{
+    private void doIt(String folder) throws Exception{
 
         String folderName = folder;
         String path = root + folderName;
@@ -36,8 +43,8 @@ public class dotxt2db<main> {
                 String lineNum = str[0];
                 String lineCont = lineTxt.substring(lineTxt.indexOf("@") + 1);
 //                 String lineCont = lineTxt.substring(lineTxt.indexOf("@")*2 + 1 + 1); //为满足错误txt
-                System.out.println(fileName);
-                System.out.println( "\n" +
+                System.out.println("\n" + fileName);
+                System.out.println(
                         folderName + " " + lineNum + " : " + lineCont
                 );
                 // do 写一行入数据库中一条记录
@@ -46,8 +53,9 @@ public class dotxt2db<main> {
                 // switch
                 flag =  tryWrDB.insertRecord(lineCont, folderName);
                 //
-                System.out.println("Result=======" + flag);
-                System.out.println("ErrorMeg:" + tryWrDB.errorMeg + "\n");
+                this.logger.info("Result : " + flag);
+                // System.out.println(this.logger.toString() + "ErrorMeg:" + tryWrDB.errorMeg + "\n");
+                this.logger.error("ErrorMeg : " + tryWrDB.errorMeg);
 
 
             }
@@ -57,8 +65,10 @@ public class dotxt2db<main> {
     }
 
     public static void main(String[] args) throws Exception {
+        dotxt2db doTxt2DB = new dotxt2db();
+
         for(String folder:folderList) {
-            doIt(folder);
+            doTxt2DB.doIt(folder);
         }
     }
 }
