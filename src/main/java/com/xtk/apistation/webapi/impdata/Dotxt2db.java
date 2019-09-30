@@ -1,12 +1,13 @@
 package com.xtk.apistation.webapi.impdata;
 
-import org.slf4j.ILoggerFactory;
+import com.xtk.apistation.webapi.bean.LogOfImport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
 import java.util.List;
 
-public class dotxt2db<main> {
+public class Dotxt2db<main> {
     // def log
     private  Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -32,13 +33,13 @@ public class dotxt2db<main> {
         List<String> fileList;
         List<String> linesOfFile;
 
-        fileList = getFileList.getFiles(path); // get file list in one folder
+        fileList = GetFileList.getFiles(path); // get file list in one folder
         for(String fileName:fileList) { // get each file in file list
-            linesOfFile = getEveryLinesOfTxt.getLineTxt(fileName);
+            linesOfFile = GetEveryLinesOfTxt.getLineTxt(fileName);
             for(String lineTxt:linesOfFile) { // get each line of file
                 // clear line
-                lineTxt = new dotxt2db().delSpaceChar(lineTxt);
-                lineTxt = new dotxt2db().fillLastSpace(lineTxt);
+                lineTxt = new Dotxt2db().delSpaceChar(lineTxt);
+                lineTxt = new Dotxt2db().fillLastSpace(lineTxt);
                 String[] str = lineTxt.split("@");
                 String lineNum = str[0];
                 String lineCont = lineTxt.substring(lineTxt.indexOf("@") + 1);
@@ -50,12 +51,36 @@ public class dotxt2db<main> {
                 // do 写一行入数据库中一条记录
                 boolean flag;
                 TryWrDB tryWrDB = new TryWrDB();
-                // switch
                 flag =  tryWrDB.insertRecord(lineCont, folderName);
+
+                //build log obj
+                LogOfImport loi = new LogOfImport();
+                loi.setNameOfTxtfile( fileName );
+                loi.setNameOfInterface( folderName );
+                loi.setNumberOfLine(new BigDecimal(lineNum));
+                loi.setContentOfOneline(lineTxt);  // lineCont
+                loi.setResultOfImport( flag + " " );
+                loi.setErrorMessage(tryWrDB.errorMeg);
+                this.logger.info( "ImpR:---  " +
+                        new ImpRecord().insertRecord(loi)
+                );
+
                 //
                 this.logger.info("Result : " + flag);
-                // System.out.println(this.logger.toString() + "ErrorMeg:" + tryWrDB.errorMeg + "\n");
                 this.logger.error("ErrorMeg : " + tryWrDB.errorMeg);
+
+                //
+/*                System.out.println(
+                        fileName + "\n" +
+                                folderName + "\n" +
+                                "time" + "\n" +
+                                lineCont + "\n" +
+                                lineNum + "\n" +
+                                flag + "\n" +
+                                "ErrorMeg : " + tryWrDB.errorMeg
+
+
+                );*/
 
 
             }
@@ -65,7 +90,7 @@ public class dotxt2db<main> {
     }
 
     public static void main(String[] args) throws Exception {
-        dotxt2db doTxt2DB = new dotxt2db();
+        Dotxt2db doTxt2DB = new Dotxt2db();
 
         for(String folder:folderList) {
             doTxt2DB.doIt(folder);

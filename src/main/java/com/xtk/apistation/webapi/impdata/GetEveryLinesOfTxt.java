@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class getEveryLinesOfTxt {
+public class GetEveryLinesOfTxt {
     // public List<String> lineContentList;
     public static List<String> getLineTxt(String file_path_name) throws Exception {
         List<String> lists = new ArrayList<String>();

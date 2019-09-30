@@ -41,5 +41,7 @@
         <mapper resource="mappers/MatAccountsMapper.xml" />
         <mapper resource="mappers/MatPurchasingStatusMapper.xml" />
         <mapper resource="mappers/MatRequestResultMapper.xml" />
+
+        <mapper resource="mappers/LogOfImportMapper.xml" />
     </mappers>
 </configuration>

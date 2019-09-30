@@ -15,7 +15,7 @@
     insert into WEBAPI.LOG_OF_IMPORT (TID, IMPORT_TIME, NAME_OF_INTERFACE,
       NAME_OF_TXTFILE, NUMBER_OF_LINE, CONTENT_OF_ONELINE,
       RESULT_OF_IMPORT, ERROR_MESSAGE)
-    values (LOG_OF_IMPORT_ID.nextval, #{importTime,jdbcType=TIMESTAMP}, #{nameOfInterface,jdbcType=VARCHAR},
+    values (LOG_OF_IMPORT_ID.nextval, systimestamp, #{nameOfInterface,jdbcType=VARCHAR},
       #{nameOfTxtfile,jdbcType=VARCHAR}, #{numberOfLine,jdbcType=DECIMAL}, #{contentOfOneline,jdbcType=VARCHAR},
       #{resultOfImport,jdbcType=VARCHAR}, #{errorMessage,jdbcType=VARCHAR})
   </insert>

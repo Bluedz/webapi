@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class getFileList {
+public class GetFileList {
     public  List<String> fileList;
 
     public static List<String> getFiles(String path) {
