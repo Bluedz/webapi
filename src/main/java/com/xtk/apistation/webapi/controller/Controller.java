@@ -272,12 +272,12 @@ public class Controller {
         String reqId = jsonObject.getString("reqId");
         String jsonAllValue =
                 jsonObject.getString("reqId") + "@" +
-                        jsonObject.getString("itemId") + "@" +
-                        jsonObject.getString("area") + "@" +
-                        jsonObject.getString("cosCenter") + "@" +
-                        jsonObject.getBigDecimal("qty") + "@" +
-                        jsonObject.getString("subUser") + "@" +
-                        jsonObject.getString("subDate") ;
+                jsonObject.getString("itemId") + "@" +
+                jsonObject.getString("area") + "@" +
+                jsonObject.getString("cosCenter") + "@" +
+                jsonObject.getBigDecimal("qty") + "@" +
+                jsonObject.getString("subUser") + "@" +
+                jsonObject.getString("subDate") ;
         System.out.println(    jsonAllValue    );
         try {
             createOrderFileToREP.createFile(fName, jsonAllValue);
