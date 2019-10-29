@@ -1,8 +1,7 @@
-package com.xtk.apistation.webapi.Mapper;
+package com.xtk.apistation.webapi.mapper;
 
 import com.xtk.apistation.webapi.bean.MatAccounts;
-import generator.MatAccountsExample;
-import org.apache.ibatis.annotations.Param;
+// import generator.MatAccountsExample;
 
 import java.util.List;
 

@@ -5,8 +5,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Properties;
 
 public class Dotxt2db<main> {
     // def log
@@ -14,8 +18,23 @@ public class Dotxt2db<main> {
 
     // init
     private static String[] folderList = { "MatAccounts" };
-    private  static String root = "D:\\test\\";
-    private  static String bakRoot = "D:\\ExchangeBak\\";
+    private  static String root ;
+    private  static String bakRoot ;
+    static {
+        InputStream in;
+        Properties pt = new Properties();
+        try {
+            in = Dotxt2db.class.getClassLoader().getResourceAsStream("localKey.properties");
+            pt.load(in);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //    private  static String root = "D:\\test\\";
+        //    private  static String bakRoot = "D:\\ExchangeBak\\";
+        root = pt.getProperty("root");
+        bakRoot = pt.getProperty("bakRoot");
+    }
 
     // 去掉空白字符函数
     private String delSpaceChar( String str){
@@ -113,7 +132,6 @@ public class Dotxt2db<main> {
 
     public static void main(String[] args) throws Exception {
         Dotxt2db doTxt2DB = new Dotxt2db();
-
         for(String folder:folderList) {
             doTxt2DB.doIt(folder);
         }

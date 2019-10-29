@@ -1,6 +1,6 @@
 package com.xtk.apistation.webapi.impdata;
 
-import com.xtk.apistation.webapi.Mapper.LogOfImportMapper;
+import com.xtk.apistation.webapi.mapper.LogOfImportMapper;
 import com.xtk.apistation.webapi.bean.LogOfImport;
 import com.xtk.apistation.webapi.singleton.SingletonMybatis;
 import org.apache.ibatis.session.SqlSession;

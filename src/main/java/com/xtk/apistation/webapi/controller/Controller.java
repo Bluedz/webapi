@@ -2,7 +2,7 @@ package com.xtk.apistation.webapi.controller;
 
 
 // import com.xtk.apistation.webapi.Mapper.TstUserMapper;
-import com.xtk.apistation.webapi.Mapper.*;
+import com.xtk.apistation.webapi.mapper.*;
 // import com.xtk.apistation.webapi.bean.TST_User;
 import com.xtk.apistation.webapi.bean.*;
 import com.xtk.apistation.webapi.singleton.SingletonMybatis;

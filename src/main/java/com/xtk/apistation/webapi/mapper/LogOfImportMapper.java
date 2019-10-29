@@ -1,9 +1,8 @@
-package com.xtk.apistation.webapi.Mapper;
+package com.xtk.apistation.webapi.mapper;
 
 import com.xtk.apistation.webapi.bean.LogOfImport;
-import generator.LogOfImportExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+// import generator.LogOfImportExample;
+
 
 public interface LogOfImportMapper {
     int insert(LogOfImport record);

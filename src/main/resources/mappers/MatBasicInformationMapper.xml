@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xtk.apistation.webapi.Mapper.MatBasicInformationMapper">
+<mapper namespace="com.xtk.apistation.webapi.mapper.MatBasicInformationMapper">
   <resultMap id="BaseResultMap" type="com.xtk.apistation.webapi.bean.MatBasicInformation">
     <id column="TID" jdbcType="DECIMAL" property="tid" />
     <result column="SERIAL_NUMBER" jdbcType="DECIMAL" property="serialNumber" />

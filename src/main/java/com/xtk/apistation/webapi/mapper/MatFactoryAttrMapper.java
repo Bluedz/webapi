@@ -1,8 +1,7 @@
-package com.xtk.apistation.webapi.Mapper;
+package com.xtk.apistation.webapi.mapper;
 
 import com.xtk.apistation.webapi.bean.MatFactoryAttr;
-import generator.MatFactoryAttrExample;
-import org.apache.ibatis.annotations.Param;
+// import generator.MatFactoryAttrExample;
 
 import java.util.List;
 

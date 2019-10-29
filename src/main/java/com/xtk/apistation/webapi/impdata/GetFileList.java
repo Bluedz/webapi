@@ -12,13 +12,13 @@ public class GetFileList {
         File file = new File(path);
         File[] tempList = file.listFiles();
 
-        for (int i = 0; i < tempList.length; i++) {
-            if (tempList[i].isFile()) {
-                files.add(tempList[i].toString());
+        for (File value : tempList) {
+            if (value.isFile()) {
+                files.add(value.toString());
                 //文件名，不包含路径
                 //String fileName = tempList[i].getName();
             }
-            if (tempList[i].isDirectory()) {
+            if (value.isDirectory()) {
                 //这里就不递归了，
             }
         }

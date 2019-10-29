@@ -1,13 +1,12 @@
 package com.xtk.apistation.webapi.impdata;
 
 import com.xtk.apistation.webapi.bean.MatFactoryAttr;
-import com.xtk.apistation.webapi.Mapper.MatFactoryAttrMapper;
+import com.xtk.apistation.webapi.mapper.MatFactoryAttrMapper;
 import com.xtk.apistation.webapi.singleton.SingletonMybatis;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 public class tst {
     private static SqlSessionFactory sqlSessionFactory;

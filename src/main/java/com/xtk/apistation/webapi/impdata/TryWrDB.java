@@ -1,15 +1,13 @@
 package com.xtk.apistation.webapi.impdata;
 
 
-import com.xtk.apistation.webapi.Mapper.*;
+import com.xtk.apistation.webapi.mapper.*;
 import com.xtk.apistation.webapi.bean.*;
 import com.xtk.apistation.webapi.singleton.SingletonMybatis;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 public class TryWrDB {
     private static SqlSessionFactory sqlSessionFactory;

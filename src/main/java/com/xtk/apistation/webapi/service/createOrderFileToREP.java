@@ -11,7 +11,7 @@ public class createOrderFileToREP {
         SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");//设置日期格式
         String timeStr = df.format(new Date());
         String tstPathFragment = "tst_"; // " "
-        String path = "D:\\EXCHANGE\\" +
+        String path = "E:\\Codes\\idea\\APIStation\\testDatas\\EXCHANGE\\" + // "D:\\EXCHANGE\\" +
                 tstPathFragment + fileName + "\\" +
                 fileName + "-" + timeStr + "-" + System.currentTimeMillis() + ".txt";
         File file = new File(path);

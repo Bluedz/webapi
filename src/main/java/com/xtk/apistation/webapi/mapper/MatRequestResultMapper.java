@@ -1,8 +1,7 @@
-package com.xtk.apistation.webapi.Mapper;
+package com.xtk.apistation.webapi.mapper;
 
 import com.xtk.apistation.webapi.bean.MatRequestResult;
-import generator.MatRequestResultExample;
-import org.apache.ibatis.annotations.Param;
+// import generator.MatRequestResultExample;
 
 import java.util.List;
 

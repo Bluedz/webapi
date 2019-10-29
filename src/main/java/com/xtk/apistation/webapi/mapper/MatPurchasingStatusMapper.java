@@ -1,8 +1,7 @@
-package com.xtk.apistation.webapi.Mapper;
+package com.xtk.apistation.webapi.mapper;
 
 import com.xtk.apistation.webapi.bean.MatPurchasingStatus;
-import generator.MatPurchasingStatusExample;
-import org.apache.ibatis.annotations.Param;
+// import generator.MatPurchasingStatusExample;
 
 import java.util.List;
 
