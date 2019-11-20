@@ -1,8 +1,11 @@
 package com.xtk.apistation.webapi.service;
 
+import com.xtk.apistation.webapi.impdata.Dotxt2db;
+
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import com.xtk.apistation.webapi.impdata.Dotxt2db;
 
 public class createOrderFileToREP {
     public static void createFile(String fileName, String str) throws IOException {
@@ -11,7 +14,7 @@ public class createOrderFileToREP {
         SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");//设置日期格式
         String timeStr = df.format(new Date());
         String tstPathFragment = "tst_"; // " "
-        String path = "E:\\Codes\\idea\\APIStation\\testDatas\\EXCHANGE\\" + // "D:\\EXCHANGE\\" +
+        String path = Dotxt2db.root + // "D:\\EXCHANGE\\" "E:\\Codes\\idea\\APIStation\\testDatas\\EXCHANGE\\" +
                 tstPathFragment + fileName + "\\" +
                 fileName + "-" + timeStr + "-" + System.currentTimeMillis() + ".txt";
         File file = new File(path);

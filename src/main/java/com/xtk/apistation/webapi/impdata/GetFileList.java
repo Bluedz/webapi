@@ -27,7 +27,7 @@ public class GetFileList {
 
     public static void main(String[] args) {
         // 测试读取文件列表效果 --
-        String uri = "D:/_sync/jobs/西泰克/备件接口项目/文档/需求文档";
+        String uri = "D:\\testOver\\MatAccounts";
         List<String> result = getFiles(uri);
         for(String name:result) {
             System.out.println(name);

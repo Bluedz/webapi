@@ -17,9 +17,11 @@ public class Dotxt2db<main> {
     private  Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // init
-    private static String[] folderList = { "MatAccounts" };
-    private  static String root ;
-    private  static String bakRoot ;
+    private static String[] folderList = {
+            "MatAccounts", "MatFactoryAttr", "MatInfor", "MatPurchasingStatus", "MatRequestResult"
+    }; //  MatFactoryAttr
+    public  static String root ;
+    public  static String bakRoot ;
     static {
         InputStream in;
         Properties pt = new Properties();
