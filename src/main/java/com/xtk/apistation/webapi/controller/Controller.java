@@ -239,13 +239,13 @@ public class Controller {
         // BigDecimal x = jsonObject.getBigDecimal("qty");
         String reqId = jsonObject.getString("reqId");
         String jsonAllValue =
-                jsonObject.getString("reqId") + "@" +
-                jsonObject.getString("itemId") + "@" +
-                jsonObject.getString("deviceId") + "@" +
-                jsonObject.getBigDecimal("qty") + "@" +
-                jsonObject.getString("cosCenter") + "@" +
-                jsonObject.getString("zChart") + "@" +
-                jsonObject.getString("subUser") + "@" +
+                jsonObject.getString("reqId") + " " +
+                jsonObject.getString("itemId") + " " +
+                jsonObject.getString("deviceId") + " " +
+                jsonObject.getBigDecimal("qty") + " " +
+                jsonObject.getString("cosCenter") + " " +
+                jsonObject.getString("zChart") + " " +
+                jsonObject.getString("subUser") + " " +
                 jsonObject.getString("subDate") ;
         System.out.println(    jsonAllValue    );
         try {
@@ -271,12 +271,12 @@ public class Controller {
         // BigDecimal x = jsonObject.getBigDecimal("qty");
         String reqId = jsonObject.getString("reqId");
         String jsonAllValue =
-                jsonObject.getString("reqId") + "@" +
-                jsonObject.getString("itemId") + "@" +
-                jsonObject.getString("area") + "@" +
-                jsonObject.getString("cosCenter") + "@" +
-                jsonObject.getBigDecimal("qty") + "@" +
-                jsonObject.getString("subUser") + "@" +
+                jsonObject.getString("reqId") + " " +
+                jsonObject.getString("area") + " " +
+                jsonObject.getString("cosCenter") + " " +
+                jsonObject.getString("itemId") + " " +
+                jsonObject.getBigDecimal("qty") + " " +
+                jsonObject.getString("subUser") + " " +
                 jsonObject.getString("subDate") ;
         System.out.println(    jsonAllValue    );
         try {
