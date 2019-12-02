@@ -14,6 +14,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
@@ -22,6 +25,8 @@ import com.xtk.apistation.webapi.service.createOrderFileToREP;
 @RestController
 @RequestMapping("/index") //在类上使用RequestMapping，里面设置的value就是方法的父路径
 public class Controller {
+    // def log
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private static SqlSessionFactory sqlSessionFactory;
     static {
@@ -69,8 +74,8 @@ public class Controller {
         // responseResult=ResponseResult.success(listMatInfor);
         //
         // responseResult=ResponseResult.fail("no");
-        System.out.println(responseResult.msg);
-        System.out.println(responseResult.success);
+        this.logger.info("responseResult.msg" + responseResult.msg);
+        this.logger.info("responseResult: " + responseResult.success);
         return responseResult;
     }
 
@@ -107,8 +112,10 @@ public class Controller {
         // responseResult=ResponseResult.success(listMatInfor);
         //
         // responseResult=ResponseResult.fail("no");
-        System.out.println(responseResult.msg);
-        System.out.println(responseResult.success);
+        this.logger.info("responseResult.msg" + responseResult.msg);
+        this.logger.info("responseResult: " + responseResult.success);
+//        System.out.println(responseResult.msg);
+//        System.out.println(responseResult.success);
         return responseResult;
     }
 
@@ -145,8 +152,10 @@ public class Controller {
         // responseResult=ResponseResult.success(listMatInfor);
         //
         // responseResult=ResponseResult.fail("no");
-        System.out.println(responseResult.msg);
-        System.out.println(responseResult.success);
+        this.logger.info("responseResult.msg" + responseResult.msg);
+        this.logger.info("responseResult: " + responseResult.success);
+//        System.out.println(responseResult.msg);
+//        System.out.println(responseResult.success);
         return responseResult;
     }
 
@@ -183,8 +192,10 @@ public class Controller {
         // responseResult=ResponseResult.success(listMatInfor);
         //
         // responseResult=ResponseResult.fail("no");
-        System.out.println(responseResult.msg);
-        System.out.println(responseResult.success);
+        this.logger.info("responseResult.msg" + responseResult.msg);
+        this.logger.info("responseResult: " + responseResult.success);
+//        System.out.println(responseResult.msg);
+//        System.out.println(responseResult.success);
         return responseResult;
     }
 
@@ -221,15 +232,18 @@ public class Controller {
         // responseResult=ResponseResult.success(listMatInfor);
         //
         // responseResult=ResponseResult.fail("no");
-        System.out.println(responseResult.msg);
-        System.out.println(responseResult.success);
+        this.logger.info("responseResult.msg" + responseResult.msg);
+        this.logger.info("responseResult: " + responseResult.success);
+//        System.out.println(responseResult.msg);
+//        System.out.println(responseResult.success);
         return responseResult;
     }
 
     // MatOrder --	物料申购单数据
     @RequestMapping(method = RequestMethod.POST,value = "/MatOrder")
     public ResponseResult setMatOrder(@RequestBody String name) throws IOException {
-        System.out.println(name);
+        this.logger.info(name);
+//        System.out.println(name);
 
         String fName = "MatOrder";
         ResponseResult responseResult;
@@ -247,7 +261,8 @@ public class Controller {
                 jsonObject.getString("zChart") + " " +
                 jsonObject.getString("subUser") + " " +
                 jsonObject.getString("subDate") ;
-        System.out.println(    jsonAllValue    );
+        this.logger.info(jsonAllValue);
+//        System.out.println(    jsonAllValue    );
         try {
             createOrderFileToREP.createFile(fName, jsonAllValue);
             responseResult=ResponseResult.success(null);
@@ -261,7 +276,8 @@ public class Controller {
     // MatRequest -- 物料领用请求
     @RequestMapping(method = RequestMethod.POST,value = "/MatRequest")
     public ResponseResult setMatRequest(@RequestBody String name) throws IOException {
-        System.out.println(name);
+        this.logger.info(name);
+//        System.out.println(name);
 
         String fName = "MatRequest";
         ResponseResult responseResult;
@@ -278,7 +294,8 @@ public class Controller {
                 jsonObject.getBigDecimal("qty") + " " +
                 jsonObject.getString("subUser") + " " +
                 jsonObject.getString("subDate") ;
-        System.out.println(    jsonAllValue    );
+        this.logger.info(jsonAllValue);
+//        System.out.println(    jsonAllValue    );
         try {
             createOrderFileToREP.createFile(fName, jsonAllValue);
             responseResult=ResponseResult.success(null);
