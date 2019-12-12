@@ -74,8 +74,8 @@ public class Controller {
         // responseResult=ResponseResult.success(listMatInfor);
         //
         // responseResult=ResponseResult.fail("no");
-        this.logger.info("responseResult.msg" + responseResult.msg);
-        this.logger.info("responseResult: " + responseResult.success);
+        this.logger.info("MatInfor.msg: " + responseResult.msg);
+        this.logger.info("MatInfor.Result: " + responseResult.success);
         return responseResult;
     }
 
@@ -112,8 +112,8 @@ public class Controller {
         // responseResult=ResponseResult.success(listMatInfor);
         //
         // responseResult=ResponseResult.fail("no");
-        this.logger.info("responseResult.msg" + responseResult.msg);
-        this.logger.info("responseResult: " + responseResult.success);
+        this.logger.info("MatFactoryAttr.msg: " + responseResult.msg);
+        this.logger.info("MatFactoryAttr.Result: " + responseResult.success);
 //        System.out.println(responseResult.msg);
 //        System.out.println(responseResult.success);
         return responseResult;
@@ -152,8 +152,8 @@ public class Controller {
         // responseResult=ResponseResult.success(listMatInfor);
         //
         // responseResult=ResponseResult.fail("no");
-        this.logger.info("responseResult.msg" + responseResult.msg);
-        this.logger.info("responseResult: " + responseResult.success);
+        this.logger.info("MatAccounts.msg: " + responseResult.msg);
+        this.logger.info("MatAccounts.Result: " + responseResult.success);
 //        System.out.println(responseResult.msg);
 //        System.out.println(responseResult.success);
         return responseResult;
@@ -192,8 +192,8 @@ public class Controller {
         // responseResult=ResponseResult.success(listMatInfor);
         //
         // responseResult=ResponseResult.fail("no");
-        this.logger.info("responseResult.msg" + responseResult.msg);
-        this.logger.info("responseResult: " + responseResult.success);
+        this.logger.info("MatPurchasingStatus.msg: " + responseResult.msg);
+        this.logger.info("MatPurchasingStatus.Result: " + responseResult.success);
 //        System.out.println(responseResult.msg);
 //        System.out.println(responseResult.success);
         return responseResult;
@@ -232,8 +232,8 @@ public class Controller {
         // responseResult=ResponseResult.success(listMatInfor);
         //
         // responseResult=ResponseResult.fail("no");
-        this.logger.info("responseResult.msg" + responseResult.msg);
-        this.logger.info("responseResult: " + responseResult.success);
+        this.logger.info("MatRequestResult.msg: " + responseResult.msg);
+        this.logger.info("MatRequestResult.Result: " + responseResult.success);
 //        System.out.println(responseResult.msg);
 //        System.out.println(responseResult.success);
         return responseResult;
@@ -242,7 +242,7 @@ public class Controller {
     // MatOrder --	物料申购单数据
     @RequestMapping(method = RequestMethod.POST,value = "/MatOrder")
     public ResponseResult setMatOrder(@RequestBody String name) throws IOException {
-        this.logger.info(name);
+//        this.logger.info(name);
 //        System.out.println(name);
 
         String fName = "MatOrder";
@@ -261,7 +261,7 @@ public class Controller {
                 jsonObject.getString("zChart") + " " +
                 jsonObject.getString("subUser") + " " +
                 jsonObject.getString("subDate") ;
-        this.logger.info(jsonAllValue);
+        this.logger.info("MatOrder:" + jsonAllValue);
 //        System.out.println(    jsonAllValue    );
         try {
             createOrderFileToREP.createFile(fName, jsonAllValue);
@@ -276,7 +276,7 @@ public class Controller {
     // MatRequest -- 物料领用请求
     @RequestMapping(method = RequestMethod.POST,value = "/MatRequest")
     public ResponseResult setMatRequest(@RequestBody String name) throws IOException {
-        this.logger.info(name);
+//        this.logger.info(name);
 //        System.out.println(name);
 
         String fName = "MatRequest";
@@ -294,7 +294,7 @@ public class Controller {
                 jsonObject.getBigDecimal("qty") + " " +
                 jsonObject.getString("subUser") + " " +
                 jsonObject.getString("subDate") ;
-        this.logger.info(jsonAllValue);
+        this.logger.info("MatRequest.OPT: " + jsonAllValue);
 //        System.out.println(    jsonAllValue    );
         try {
             createOrderFileToREP.createFile(fName, jsonAllValue);

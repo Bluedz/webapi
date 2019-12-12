@@ -18,6 +18,8 @@ public class MatRequestResult implements Serializable {
 
     private String feedbackTime;
 
+    private String feedbackInfo;
+
     private static final long serialVersionUID = 1L;
 
     public BigDecimal getTid() {
@@ -105,5 +107,13 @@ public class MatRequestResult implements Serializable {
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
+    }
+
+    public String getFeedbackInfo() {
+        return feedbackInfo;
+    }
+
+    public void setFeedbackInfo(String feedbackInfo) {
+        this.feedbackInfo = feedbackInfo;
     }
 }

@@ -107,6 +107,7 @@ public class TryWrDB {
                 mps.setRequestNum(arrList[1]);
                 mps.setNodeStats(arrList[2]);
                 mps.setNodeTime(arrList[3]);
+                mps.setFeedbackInfo("");
                 MatPurchasingStatusMapper matPurchasingStatusMapper = sqlSession.getMapper(MatPurchasingStatusMapper.class);
                 matPurchasingStatusMapper.insert(mps);
                 // System.out.println("MatPurchasingStatus");
@@ -117,6 +118,7 @@ public class TryWrDB {
                 mrr.setCustPo(arrList[0]);
                 mrr.setCustResult(arrList[1]);
                 mrr.setFeedbackTime(arrList[2]);
+                mrr.setFeedbackInfo(arrList[3]);
                 MatRequestResultMapper matRequestResultMapper = sqlSession.getMapper(MatRequestResultMapper.class);
                 matRequestResultMapper.insert(mrr);
                 // System.out.println("MatRequestResult");
