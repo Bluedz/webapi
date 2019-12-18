@@ -7,6 +7,7 @@
     <result column="CUST_PO" jdbcType="VARCHAR" property="custPo" />
     <result column="CUST_RESULT" jdbcType="VARCHAR" property="custResult" />
     <result column="FEEDBACK_TIME" jdbcType="VARCHAR" property="feedbackTime" />
+    <result column="FEEDBACK_INFO" jdbcType="VARCHAR" property="feedbackInfo" />
   </resultMap>
   <select id="getMRRs"  resultType="MatRequestResult" resultMap="BaseResultMap">
         select * from MAT_REQUEST_RESULT

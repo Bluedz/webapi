@@ -8,6 +8,7 @@
     <result column="REQUEST_NUM" jdbcType="VARCHAR" property="requestNum" />
     <result column="NODE_STATS" jdbcType="VARCHAR" property="nodeStats" />
     <result column="NODE_TIME" jdbcType="VARCHAR" property="nodeTime" />
+    <result column="FEEDBACK_INFO" jdbcType="VARCHAR" property="feedbackInfo" />
   </resultMap>
   <select id="getMPSs"  resultType="MatPurchasingStatus" resultMap="BaseResultMap">
         select * from MAT_PURCHASING_STATUS
