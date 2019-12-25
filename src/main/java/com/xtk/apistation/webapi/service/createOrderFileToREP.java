@@ -15,7 +15,7 @@ public class createOrderFileToREP {
         String timeStr = df.format(new Date());
         String tstPathFragment = "tst_"; // " "
         String path = Dotxt2db.root + // "D:\\EXCHANGE\\" "E:\\Codes\\idea\\APIStation\\testDatas\\EXCHANGE\\" +
-                tstPathFragment + fileName + "\\" +
+                /*tstPathFragment +*/ fileName + "\\" +
                 fileName + "-" + timeStr + "-" + System.currentTimeMillis() + ".txt";
         File file = new File(path);
         /* 创建目录 */
