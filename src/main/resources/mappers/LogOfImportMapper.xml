@@ -19,6 +19,17 @@
       #{nameOfTxtfile,jdbcType=VARCHAR}, #{numberOfLine,jdbcType=DECIMAL}, #{contentOfOneline,jdbcType=VARCHAR},
       #{resultOfImport,jdbcType=VARCHAR}, #{errorMessage,jdbcType=VARCHAR})
   </insert>
+  <select id="getErrPage" resultType="LogOfImport"  resultMap="BaseResultMap">
+    SELECT * FROM (
+        SELECT tt.*, ROWNUM AS rowno FROM (
+            SELECT t.*
+            FROM log_of_import t where result_of_import = 'false '
+            ORDER BY tid
+            ) tt
+        WHERE ROWNUM <![CDATA[<=]]> (10 * ${page})
+    ) table_alias
+    WHERE table_alias.rowno > (10 * (${page}-1))
+    </select>
 <!--  <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

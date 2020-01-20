@@ -367,6 +367,35 @@ public class Controller {
 //    }
     // ---
 
+    // ErrInfo -- 错误信息
+   @RequestMapping(method = RequestMethod.POST,value = "/ErrInfo")
+   public ResponseResult setErrInfo(@RequestBody String name) throws IOException {
+       ResponseResult responseResult;
+       List<LogOfImport> listLogResult = new ArrayList<>();
+       MatRequestResult matRequestResult;
+
+       SqlSession sqlSession = sqlSessionFactory.openSession();
+
+       try {
+           LogOfImportMapper logOfImportMapper = sqlSession.getMapper(LogOfImportMapper.class);
+           JSONObject jsonObject = JSON.parseObject(name);
+           int page = jsonObject.getInteger("page");
+           listLogResult = logOfImportMapper.getErrPage(page);
+           responseResult=ResponseResult.success(listLogResult);
+//          sqlSession.commit();
+       }finally {
+           sqlSession.close();
+       }
+       // return true;
+       // responseResult=ResponseResult.success(listMatInfor);
+       //
+       // responseResult=ResponseResult.fail("no");
+       this.logger.info("MatRequestResult.msg: " + responseResult.msg);
+       this.logger.info("MatRequestResult.Result: " + responseResult.success);
+//        System.out.println(responseResult.msg);
+//        System.out.println(responseResult.success);
+       return responseResult;
+   }
     @RequestMapping(method = RequestMethod.GET,value = "/users")
     public List<User> getUsers(){
         List<User> listUsers = null;

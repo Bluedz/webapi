@@ -1,12 +1,14 @@
 package com.xtk.apistation.webapi.mapper;
 
 import com.xtk.apistation.webapi.bean.LogOfImport;
+
+import java.util.List;
 // import generator.LogOfImportExample;
 
 
 public interface LogOfImportMapper {
     int insert(LogOfImport record);
-
+    List<LogOfImport> getErrPage(int page);
 /*    long countByExample(LogOfImportExample example);
 
     int deleteByExample(LogOfImportExample example);
