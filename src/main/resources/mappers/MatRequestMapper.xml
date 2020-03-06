@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtk.apistation.webapi.mapper.MatRequestMapper">
+  <resultMap id="BaseResultMap" type="com.xtk.apistation.webapi.bean.MatRequest">
+    <result column="TID" jdbcType="DECIMAL" property="tid" />
+    <result column="JSON_STR" jdbcType="VARCHAR" property="jsonStr" />
+    <result column="RECEIVED_TIME" jdbcType="VARCHAR" property="receivedTime" />
+  </resultMap>
+  <insert id="insert" parameterType="com.xtk.apistation.webapi.bean.MatRequest">
+    insert into WEBAPI.MAT_REQUEST (TID, JSON_STR, RECEIVED_TIME
+      )
+    values (MAT_REQUEST_ID.nextval,  #{jsonStr,jdbcType=VARCHAR}, #{receivedTime,jdbcType=VARCHAR}
+      )
+  </insert>
+</mapper>
