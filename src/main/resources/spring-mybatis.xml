@@ -19,6 +19,9 @@
         <typeAlias alias="MatPurchasingStatus" type="com.xtk.apistation.webapi.bean.MatPurchasingStatus"/>
         <typeAlias alias="MatRequestResult" type="com.xtk.apistation.webapi.bean.MatRequestResult"/>
         <typeAlias alias="LogOfImport" type="com.xtk.apistation.webapi.bean.LogOfImport"/>
+        <!-- TPMS+ -->
+        <typeAlias alias="TpmsMatInfo" type="com.xtk.apistation.webapi.bean.TpmsMatInfo"/>
+        <!-- TPMS- -->
     </typeAliases>
     <!--环境配置-->
     <environments default="development">
@@ -43,7 +46,9 @@
         <mapper resource="mappers/MatRequestResultMapper.xml" />
         <mapper resource="mappers/MatOrderMapper.xml" />
         <mapper resource="mappers/MatRequestMapper.xml" />
-
+<!-- TPMS+ -->
+        <mapper resource="mappers/TpmsMatInfoMapper.xml" />
+<!-- TPMS- -->
         <mapper resource="mappers/LogOfImportMapper.xml" />
     </mappers>
 

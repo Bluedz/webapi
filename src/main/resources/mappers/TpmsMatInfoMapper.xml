@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtk.apistation.webapi.mapper.TpmsMatInfoMapper">
+  <resultMap id="BaseResultMap" type="com.xtk.apistation.webapi.bean.TpmsMatInfo">
+    <result column="TID" jdbcType="DECIMAL" property="tid" />
+    <result column="SERIAL_NUMBER" jdbcType="DECIMAL" property="serialNumber" />
+    <result column="DC_MATNUM" jdbcType="VARCHAR" property="dcMatnum" />
+    <result column="SVW_MATNUM" jdbcType="VARCHAR" property="svwMatnum" />
+    <result column="UNIT" jdbcType="VARCHAR" property="unit" />
+    <result column="DESC_SPEC" jdbcType="VARCHAR" property="descSpec" />
+    <result column="OG_SPEC" jdbcType="VARCHAR" property="ogSpec" />
+    <result column="MFR" jdbcType="VARCHAR" property="mfr" />
+    <result column="MFR _NO" jdbcType="VARCHAR" property="mfrNo" />
+    <result column="EQUIP_ MFR" jdbcType="VARCHAR" property="equipMfr" />
+    <result column="EQUIP_ MFR_NO" jdbcType="VARCHAR" property="equipMfrNo" />
+    <result column="EQUIP_NO" jdbcType="VARCHAR" property="equipNo" />
+    <result column="DIAGRAM_NO" jdbcType="VARCHAR" property="diagramNo" />
+    <result column="PROD_CODE_DESC" jdbcType="VARCHAR" property="prodCodeDesc" />
+    <result column="ABC_CODE" jdbcType="VARCHAR" property="abcCode" />
+    <result column="PLANNER_CODE" jdbcType="VARCHAR" property="plannerCode" />
+  </resultMap>
+
+  <select id="getTMIs" resultType="TpmsMatInfo" resultMap="BaseResultMap">
+        select * from WEBAPI.TPMS_MAT_INFO
+        where SERIAL_NUMBER &gt; #{p1} and SERIAL_NUMBER &lt; = (#{p1} + #{p2})
+        order by TID
+    </select>
+  <select id="getTMIBySNId" parameterType="int" resultType="TpmsMatInfo" resultMap="BaseResultMap">
+        select * from WEBAPI.TPMS_MAT_INFO where SERIAL_NUMBER = #{sn}
+    </select>
+<!--  <insert id="insert" parameterType="com.xtk.apistation.webapi.bean.MatFactoryAttr">-->
+<!--    insert into WEBAPI.MAT_FACTORY_ATTR (TID, SERIAL_NUMBER, MATERIAL_NUMBER,-->
+<!--      AREA, STOCK_MAX, STOCK_MIN,-->
+<!--      QUALITY_ASSURANCE)-->
+<!--    values (MAT_FACTORY_ATTR_ID.nextval, (select Max(SERIAL_NUMBER)+1 from MAT_FACTORY_ATTR), #{materialNumber,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{stockMax,jdbcType=DECIMAL}, #{stockMin,jdbcType=DECIMAL}, #{qualityAssurance,jdbcType=DECIMAL})-->
+<!--  </insert>-->
+
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    TID, SERIAL_NUMBER, DC_MATNUM, SVW_MATNUM, UNIT, DESC_SPEC, OG_SPEC, MFR, `MFR _NO`, 
+    `EQUIP_ MFR`, `EQUIP_ MFR_NO`, EQUIP_NO, DIAGRAM_NO, PROD_CODE_DESC, ABC_CODE, PLANNER_CODE
+  </sql>
+  <select id="selectByExample" parameterType="generator.TpmsMatInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from WEBAPI.TPMS_MAT_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="generator.TpmsMatInfoExample">
+    delete from WEBAPI.TPMS_MAT_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xtk.apistation.webapi.bean.TpmsMatInfo">
+    insert into WEBAPI.TPMS_MAT_INFO (TID, SERIAL_NUMBER, DC_MATNUM, 
+      SVW_MATNUM, UNIT, DESC_SPEC, 
+      OG_SPEC, MFR, `MFR _NO`, 
+      `EQUIP_ MFR`, `EQUIP_ MFR_NO`, EQUIP_NO, 
+      DIAGRAM_NO, PROD_CODE_DESC, ABC_CODE, 
+      PLANNER_CODE)
+    values (#{tid,jdbcType=DECIMAL}, #{serialNumber,jdbcType=DECIMAL}, #{dcMatnum,jdbcType=VARCHAR}, 
+      #{svwMatnum,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{descSpec,jdbcType=VARCHAR}, 
+      #{ogSpec,jdbcType=VARCHAR}, #{mfr,jdbcType=VARCHAR}, #{mfrNo,jdbcType=VARCHAR}, 
+      #{equipMfr,jdbcType=VARCHAR}, #{equipMfrNo,jdbcType=VARCHAR}, #{equipNo,jdbcType=VARCHAR}, 
+      #{diagramNo,jdbcType=VARCHAR}, #{prodCodeDesc,jdbcType=VARCHAR}, #{abcCode,jdbcType=VARCHAR}, 
+      #{plannerCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xtk.apistation.webapi.bean.TpmsMatInfo">
+    insert into WEBAPI.TPMS_MAT_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tid != null">
+        TID,
+      </if>
+      <if test="serialNumber != null">
+        SERIAL_NUMBER,
+      </if>
+      <if test="dcMatnum != null">
+        DC_MATNUM,
+      </if>
+      <if test="svwMatnum != null">
+        SVW_MATNUM,
+      </if>
+      <if test="unit != null">
+        UNIT,
+      </if>
+      <if test="descSpec != null">
+        DESC_SPEC,
+      </if>
+      <if test="ogSpec != null">
+        OG_SPEC,
+      </if>
+      <if test="mfr != null">
+        MFR,
+      </if>
+      <if test="mfrNo != null">
+        `MFR _NO`,
+      </if>
+      <if test="equipMfr != null">
+        `EQUIP_ MFR`,
+      </if>
+      <if test="equipMfrNo != null">
+        `EQUIP_ MFR_NO`,
+      </if>
+      <if test="equipNo != null">
+        EQUIP_NO,
+      </if>
+      <if test="diagramNo != null">
+        DIAGRAM_NO,
+      </if>
+      <if test="prodCodeDesc != null">
+        PROD_CODE_DESC,
+      </if>
+      <if test="abcCode != null">
+        ABC_CODE,
+      </if>
+      <if test="plannerCode != null">
+        PLANNER_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tid != null">
+        #{tid,jdbcType=DECIMAL},
+      </if>
+      <if test="serialNumber != null">
+        #{serialNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="dcMatnum != null">
+        #{dcMatnum,jdbcType=VARCHAR},
+      </if>
+      <if test="svwMatnum != null">
+        #{svwMatnum,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="descSpec != null">
+        #{descSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="ogSpec != null">
+        #{ogSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="mfr != null">
+        #{mfr,jdbcType=VARCHAR},
+      </if>
+      <if test="mfrNo != null">
+        #{mfrNo,jdbcType=VARCHAR},
+      </if>
+      <if test="equipMfr != null">
+        #{equipMfr,jdbcType=VARCHAR},
+      </if>
+      <if test="equipMfrNo != null">
+        #{equipMfrNo,jdbcType=VARCHAR},
+      </if>
+      <if test="equipNo != null">
+        #{equipNo,jdbcType=VARCHAR},
+      </if>
+      <if test="diagramNo != null">
+        #{diagramNo,jdbcType=VARCHAR},
+      </if>
+      <if test="prodCodeDesc != null">
+        #{prodCodeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="abcCode != null">
+        #{abcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="plannerCode != null">
+        #{plannerCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="generator.TpmsMatInfoExample" resultType="java.lang.Long">
+    select count(*) from WEBAPI.TPMS_MAT_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update WEBAPI.TPMS_MAT_INFO
+    <set>
+      <if test="record.tid != null">
+        TID = #{record.tid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.serialNumber != null">
+        SERIAL_NUMBER = #{record.serialNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dcMatnum != null">
+        DC_MATNUM = #{record.dcMatnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.svwMatnum != null">
+        SVW_MATNUM = #{record.svwMatnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit != null">
+        UNIT = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.descSpec != null">
+        DESC_SPEC = #{record.descSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ogSpec != null">
+        OG_SPEC = #{record.ogSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mfr != null">
+        MFR = #{record.mfr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mfrNo != null">
+        `MFR _NO` = #{record.mfrNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.equipMfr != null">
+        `EQUIP_ MFR` = #{record.equipMfr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.equipMfrNo != null">
+        `EQUIP_ MFR_NO` = #{record.equipMfrNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.equipNo != null">
+        EQUIP_NO = #{record.equipNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.diagramNo != null">
+        DIAGRAM_NO = #{record.diagramNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodCodeDesc != null">
+        PROD_CODE_DESC = #{record.prodCodeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.abcCode != null">
+        ABC_CODE = #{record.abcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plannerCode != null">
+        PLANNER_CODE = #{record.plannerCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update WEBAPI.TPMS_MAT_INFO
+    set TID = #{record.tid,jdbcType=DECIMAL},
+      SERIAL_NUMBER = #{record.serialNumber,jdbcType=DECIMAL},
+      DC_MATNUM = #{record.dcMatnum,jdbcType=VARCHAR},
+      SVW_MATNUM = #{record.svwMatnum,jdbcType=VARCHAR},
+      UNIT = #{record.unit,jdbcType=VARCHAR},
+      DESC_SPEC = #{record.descSpec,jdbcType=VARCHAR},
+      OG_SPEC = #{record.ogSpec,jdbcType=VARCHAR},
+      MFR = #{record.mfr,jdbcType=VARCHAR},
+      `MFR _NO` = #{record.mfrNo,jdbcType=VARCHAR},
+      `EQUIP_ MFR` = #{record.equipMfr,jdbcType=VARCHAR},
+      `EQUIP_ MFR_NO` = #{record.equipMfrNo,jdbcType=VARCHAR},
+      EQUIP_NO = #{record.equipNo,jdbcType=VARCHAR},
+      DIAGRAM_NO = #{record.diagramNo,jdbcType=VARCHAR},
+      PROD_CODE_DESC = #{record.prodCodeDesc,jdbcType=VARCHAR},
+      ABC_CODE = #{record.abcCode,jdbcType=VARCHAR},
+      PLANNER_CODE = #{record.plannerCode,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

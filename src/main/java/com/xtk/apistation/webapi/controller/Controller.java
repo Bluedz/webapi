@@ -285,7 +285,6 @@ public class Controller {
         return responseResult;
     }
 
-
     // MatRequest -- 物料领用请求
     @RequestMapping(method = RequestMethod.POST,value = "/MatRequest")
     public ResponseResult setMatRequest(@RequestBody String name) throws IOException {
@@ -326,6 +325,43 @@ public class Controller {
         }catch (Exception e){
             e.printStackTrace();
         }
+        return responseResult;
+    }
+
+    //-- TPMS --
+    // TPMS_MatInfo -- 备件基础数据接口
+    @RequestMapping(method = RequestMethod.POST, value = "/TpmsMatInfo")
+    public ResponseResult getTMIs(@RequestBody String name){
+        ResponseResult responseResult;
+        List<TpmsMatInfo> listTpmsMatInfo = new ArrayList<>();
+        TpmsMatInfo tpmsMatInfo;
+
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        try{
+            TpmsMatInfoMapper tpmsMatInfoMapper = sqlSession.getMapper(TpmsMatInfoMapper.class);
+            JSONObject jsonObject = JSON.parseObject(name);
+            int SerialNumber = jsonObject.getInteger("SerialNumber");
+            int MaxCount = jsonObject.getInteger("MaxCount");
+            if (jsonObject.get("SpecifiedNumber") == null) {
+                System.out.println("SpcifiedNumber is null");
+                // 返回增量
+                listTpmsMatInfo = tpmsMatInfoMapper.getTMIs(SerialNumber, MaxCount);
+            }else{
+                int SpecifiedNumber = jsonObject.getInteger("SpecifiedNumber");
+                // 返回特定
+                tpmsMatInfo = tpmsMatInfoMapper.getTMIBySNId(SpecifiedNumber);
+                listTpmsMatInfo.add(tpmsMatInfo);
+            }
+            responseResult = ResponseResult.success(listTpmsMatInfo);
+            sqlSession.commit();
+        }finally {
+            sqlSession.close();
+        }
+        // ...
+        this.logger.info("TpmsMatInfo.msg: " + responseResult.msg);
+        this.logger.info("TpmsMatInfo.Result: " + responseResult.success);
+        // ...
         return responseResult;
     }
 
