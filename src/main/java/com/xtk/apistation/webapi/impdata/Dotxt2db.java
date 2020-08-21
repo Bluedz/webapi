@@ -18,7 +18,8 @@ public class Dotxt2db<main> {
 
     // init
     private static String[] folderList = {
-            "MatAccounts", "MatFactoryAttr", "MatInfor", "MatPurchasingStatus", "MatRequestResult"
+            "MatAccounts"
+            , "MatFactoryAttr", "MatInfor", "MatPurchasingStatus", "MatRequestResult"
     }; //  MatFactoryAttr
     public  static String root ;
     public  static String bakRoot ;
@@ -63,12 +64,15 @@ public class Dotxt2db<main> {
             try {
                 linesOfFile = GetEveryLinesOfTxt.getLineTxt(fileName);
                 boolean isErr = true;
+                int i = 1;
                 try{
                     for(String lineTxt:linesOfFile) { // get each line of file
                         String originalLineTxt = lineTxt;
                         // clear line
                         lineTxt = new Dotxt2db().delSpaceChar(lineTxt);
                         lineTxt = new Dotxt2db().fillLastSpace(lineTxt);
+                        if("MatRequestResult".equals(folder))
+                            lineTxt = i++ + "@" + lineTxt;
                         String[] str = lineTxt.split("@");
                         String lineNum = str[0];
                         String lineCont = lineTxt.substring(lineTxt.indexOf("@") + 1);
@@ -156,6 +160,7 @@ public class Dotxt2db<main> {
         for(String folder:folderList) {
             doTxt2DB.doIt(folder);
         }
+        //doTxt2DB.doIt("MatRequestResult");
     }
 }
 

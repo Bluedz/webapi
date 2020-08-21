@@ -44,6 +44,58 @@ public class TryWrDB {
 
     public void makeObject( SqlSession sqlSession, String[] arrList, String folderName){
         switch(folderName) {
+            // TPMS+
+            case "tst_tpms_Matinfo":{
+                TpmsMatInfo tmi = new TpmsMatInfo();
+                tmi.setDcMatnum(arrList[0]);
+                tmi.setSvwMatnum(arrList[1]);
+                tmi.setUnit(arrList[2]);
+                tmi.setDescSpec(arrList[3]);
+                tmi.setOgSpec(arrList[4]);
+                tmi.setMfr(arrList[5]);
+                tmi.setMfrNo(arrList[6]);
+                tmi.setEquipMfr(arrList[7]);
+                tmi.setEquipMfrNo(arrList[8]);
+                tmi.setEquipNo(arrList[9]);
+                tmi.setDiagramNo(arrList[10]);
+                tmi.setProdCodeDesc(arrList[11]);
+                tmi.setAbcCode(arrList[12]);
+                tmi.setPlannerCode(arrList[13]);
+
+                TpmsMatInfoMapper tpmsMatInfoMapper = sqlSession.getMapper(TpmsMatInfoMapper.class);
+                tpmsMatInfoMapper.insertFrTxt(tmi);
+                // System.out.println("tst_tpms_Matinfo");
+                break;
+            }
+            case "tst_tpms_Matstri":{
+                TpmsMatStri tms = new TpmsMatStri();
+                tms.setFactoryCo(arrList[0]);
+                tms.setFactoryName(arrList[1]);
+                tms.setDcMaterialNo(arrList[2]);
+                tms.setSvwMaterialNo(arrList[3]);
+                tms.setMinSafetyStock(arrList[4]);
+                tms.setMaxSafetyStock(arrList[5]);
+                tms.setRefPrice(arrList[6]);
+                tms.setTotalInventory(arrList[7]);
+                tms.setSharing(arrList[8]);
+                tms.setSafetyId(arrList[9]);
+                tms.setPlaceOfProduction(arrList[10]);
+                tms.setTotalCollection(arrList[11]);
+                tms.setAnnualConsumption(arrList[12]);
+                tms.setAnnualCollectionTimes(arrList[13]);
+                tms.setHistoricalCollectionQuantity(arrList[14]);
+                tms.setMaterialAttribute(arrList[15]);
+                tms.setRemarks(arrList[16]);
+                tms.setAttribute(arrList[17]);
+                tms.setPhoto(arrList[18]);
+                tms.setPurchaseCycle(arrList[19]);
+
+                TpmsMatStriMapper tpmsMatStriMapper = sqlSession.getMapper(TpmsMatStriMapper.class);
+                tpmsMatStriMapper.insertFrTxt(tms);
+                // System.out.println("tst_tpms_Matinfo");
+                break;
+            }
+            // TPMS-
             case "MatInfor":{
                 MatBasicInformation mbi = new MatBasicInformation();
                 mbi.setMid(arrList[0]);

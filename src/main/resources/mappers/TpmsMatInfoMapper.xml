@@ -28,6 +28,20 @@
   <select id="getTMIBySNId" parameterType="int" resultType="TpmsMatInfo" resultMap="BaseResultMap">
         select * from WEBAPI.TPMS_MAT_INFO where SERIAL_NUMBER = #{sn}
     </select>
+    <insert id="insertFrTxt" parameterType="com.xtk.apistation.webapi.bean.TpmsMatInfo">
+      insert into WEBAPI.TPMS_MAT_INFO (TID, SERIAL_NUMBER, DC_MATNUM,
+        SVW_MATNUM, UNIT, DESC_SPEC,
+        OG_SPEC, MFR, MFR_NO,
+        EQUIP_MFR, EQUIP_MFR_NO, EQUIP_NO,
+        DIAGRAM_NO, PROD_CODE_DESC, ABC_CODE,
+        PLANNER_CODE)
+      values (TPMS_MAT_INFO_ID.nextval, (select Max(SERIAL_NUMBER)+1 from WEBAPI.TPMS_MAT_INFO), #{dcMatnum,jdbcType=VARCHAR},
+        #{svwMatnum,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{descSpec,jdbcType=VARCHAR},
+        #{ogSpec,jdbcType=VARCHAR}, #{mfr,jdbcType=VARCHAR}, #{mfrNo,jdbcType=VARCHAR},
+        #{equipMfr,jdbcType=VARCHAR}, #{equipMfrNo,jdbcType=VARCHAR}, #{equipNo,jdbcType=VARCHAR},
+        #{diagramNo,jdbcType=VARCHAR}, #{prodCodeDesc,jdbcType=VARCHAR}, #{abcCode,jdbcType=VARCHAR},
+        #{plannerCode,jdbcType=VARCHAR})
+    </insert>
 <!--  <insert id="insert" parameterType="com.xtk.apistation.webapi.bean.MatFactoryAttr">-->
 <!--    insert into WEBAPI.MAT_FACTORY_ATTR (TID, SERIAL_NUMBER, MATERIAL_NUMBER,-->
 <!--      AREA, STOCK_MAX, STOCK_MIN,-->
@@ -94,8 +108,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    TID, SERIAL_NUMBER, DC_MATNUM, SVW_MATNUM, UNIT, DESC_SPEC, OG_SPEC, MFR, `MFR _NO`, 
-    `EQUIP_ MFR`, `EQUIP_ MFR_NO`, EQUIP_NO, DIAGRAM_NO, PROD_CODE_DESC, ABC_CODE, PLANNER_CODE
+    TID, SERIAL_NUMBER, DC_MATNUM, SVW_MATNUM, UNIT, DESC_SPEC, OG_SPEC, MFR, MFR_NO,
+    EQUIP_MFR, EQUIP_MFR_NO, EQUIP_NO, DIAGRAM_NO, PROD_CODE_DESC, ABC_CODE, PLANNER_CODE
   </sql>
   <select id="selectByExample" parameterType="generator.TpmsMatInfoExample" resultMap="BaseResultMap">
     select
@@ -118,17 +132,17 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.xtk.apistation.webapi.bean.TpmsMatInfo">
-    insert into WEBAPI.TPMS_MAT_INFO (TID, SERIAL_NUMBER, DC_MATNUM, 
-      SVW_MATNUM, UNIT, DESC_SPEC, 
-      OG_SPEC, MFR, `MFR _NO`, 
-      `EQUIP_ MFR`, `EQUIP_ MFR_NO`, EQUIP_NO, 
-      DIAGRAM_NO, PROD_CODE_DESC, ABC_CODE, 
+    insert into WEBAPI.TPMS_MAT_INFO (TID, SERIAL_NUMBER, DC_MATNUM,
+      SVW_MATNUM, UNIT, DESC_SPEC,
+      OG_SPEC, MFR, MFR_NO,
+      EQUIP_MFR, EQUIP_MFR_NO, EQUIP_NO,
+      DIAGRAM_NO, PROD_CODE_DESC, ABC_CODE,
       PLANNER_CODE)
-    values (#{tid,jdbcType=DECIMAL}, #{serialNumber,jdbcType=DECIMAL}, #{dcMatnum,jdbcType=VARCHAR}, 
-      #{svwMatnum,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{descSpec,jdbcType=VARCHAR}, 
-      #{ogSpec,jdbcType=VARCHAR}, #{mfr,jdbcType=VARCHAR}, #{mfrNo,jdbcType=VARCHAR}, 
-      #{equipMfr,jdbcType=VARCHAR}, #{equipMfrNo,jdbcType=VARCHAR}, #{equipNo,jdbcType=VARCHAR}, 
-      #{diagramNo,jdbcType=VARCHAR}, #{prodCodeDesc,jdbcType=VARCHAR}, #{abcCode,jdbcType=VARCHAR}, 
+    values (#{tid,jdbcType=DECIMAL}, #{serialNumber,jdbcType=DECIMAL}, #{dcMatnum,jdbcType=VARCHAR},
+      #{svwMatnum,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{descSpec,jdbcType=VARCHAR},
+      #{ogSpec,jdbcType=VARCHAR}, #{mfr,jdbcType=VARCHAR}, #{mfrNo,jdbcType=VARCHAR},
+      #{equipMfr,jdbcType=VARCHAR}, #{equipMfrNo,jdbcType=VARCHAR}, #{equipNo,jdbcType=VARCHAR},
+      #{diagramNo,jdbcType=VARCHAR}, #{prodCodeDesc,jdbcType=VARCHAR}, #{abcCode,jdbcType=VARCHAR},
       #{plannerCode,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.xtk.apistation.webapi.bean.TpmsMatInfo">
@@ -159,13 +173,13 @@
         MFR,
       </if>
       <if test="mfrNo != null">
-        `MFR _NO`,
+        MFR_NO,
       </if>
       <if test="equipMfr != null">
-        `EQUIP_ MFR`,
+        EQUIP_MFR,
       </if>
       <if test="equipMfrNo != null">
-        `EQUIP_ MFR_NO`,
+        EQUIP_MFR_NO,
       </if>
       <if test="equipNo != null">
         EQUIP_NO,
@@ -268,13 +282,13 @@
         MFR = #{record.mfr,jdbcType=VARCHAR},
       </if>
       <if test="record.mfrNo != null">
-        `MFR _NO` = #{record.mfrNo,jdbcType=VARCHAR},
+        MFR_NO = #{record.mfrNo,jdbcType=VARCHAR},
       </if>
       <if test="record.equipMfr != null">
-        `EQUIP_ MFR` = #{record.equipMfr,jdbcType=VARCHAR},
+        EQUIP_MFR = #{record.equipMfr,jdbcType=VARCHAR},
       </if>
       <if test="record.equipMfrNo != null">
-        `EQUIP_ MFR_NO` = #{record.equipMfrNo,jdbcType=VARCHAR},
+        EQUIP_MFR_NO = #{record.equipMfrNo,jdbcType=VARCHAR},
       </if>
       <if test="record.equipNo != null">
         EQUIP_NO = #{record.equipNo,jdbcType=VARCHAR},
@@ -306,9 +320,9 @@
       DESC_SPEC = #{record.descSpec,jdbcType=VARCHAR},
       OG_SPEC = #{record.ogSpec,jdbcType=VARCHAR},
       MFR = #{record.mfr,jdbcType=VARCHAR},
-      `MFR _NO` = #{record.mfrNo,jdbcType=VARCHAR},
-      `EQUIP_ MFR` = #{record.equipMfr,jdbcType=VARCHAR},
-      `EQUIP_ MFR_NO` = #{record.equipMfrNo,jdbcType=VARCHAR},
+      MFR_NO = #{record.mfrNo,jdbcType=VARCHAR},
+      EQUIP_MFR = #{record.equipMfr,jdbcType=VARCHAR},
+      EQUIP_MFR_NO = #{record.equipMfrNo,jdbcType=VARCHAR},
       EQUIP_NO = #{record.equipNo,jdbcType=VARCHAR},
       DIAGRAM_NO = #{record.diagramNo,jdbcType=VARCHAR},
       PROD_CODE_DESC = #{record.prodCodeDesc,jdbcType=VARCHAR},

@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 public interface TpmsMatInfoMapper {
     public List<TpmsMatInfo> getTMIs(int p1, int p2);
     public TpmsMatInfo getTMIBySNId(int sn);
-
+    public boolean insertFrTxt(TpmsMatInfo record);
     //
     long countByExample(TpmsMatInfoExample example);
 

@@ -29,3 +29,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### mb pulgin ###
+/src/main/java/generator/
+/src/main/resources/generator/

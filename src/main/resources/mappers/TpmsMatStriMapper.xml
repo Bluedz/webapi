@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtk.apistation.webapi.mapper.TpmsMatStriMapper">
+  <resultMap id="BaseResultMap" type="com.xtk.apistation.webapi.bean.TpmsMatStri">
+    <id column="TID" jdbcType="DECIMAL" property="tid" />
+    <result column="SERIAL_NUMBER" jdbcType="DECIMAL" property="serialNumber" />
+    <result column="FACTORY_CO" jdbcType="VARCHAR" property="factoryCo" />
+    <result column="FACTORY_NAME" jdbcType="VARCHAR" property="factoryName" />
+    <result column="DC_MATERIAL_NO" jdbcType="VARCHAR" property="dcMaterialNo" />
+    <result column="SVW_MATERIAL_NO" jdbcType="VARCHAR" property="svwMaterialNo" />
+    <result column="MIN_SAFETY_STOCK" jdbcType="VARCHAR" property="minSafetyStock" />
+    <result column="MAX_SAFETY_STOCK" jdbcType="VARCHAR" property="maxSafetyStock" />
+    <result column="REF_PRICE" jdbcType="VARCHAR" property="refPrice" />
+    <result column="TOTAL_INVENTORY" jdbcType="VARCHAR" property="totalInventory" />
+    <result column="SHARING" jdbcType="VARCHAR" property="sharing" />
+    <result column="SAFETY_ID" jdbcType="VARCHAR" property="safetyId" />
+    <result column="PLACE_OF_PRODUCTION" jdbcType="VARCHAR" property="placeOfProduction" />
+    <result column="TOTAL_COLLECTION" jdbcType="VARCHAR" property="totalCollection" />
+    <result column="ANNUAL_CONSUMPTION" jdbcType="VARCHAR" property="annualConsumption" />
+    <result column="ANNUAL_COLLECTION_TIMES" jdbcType="VARCHAR" property="annualCollectionTimes" />
+    <result column="HISTORICAL_COLLECTION_QUANTITY" jdbcType="VARCHAR" property="historicalCollectionQuantity" />
+    <result column="MATERIAL_ATTRIBUTE" jdbcType="VARCHAR" property="materialAttribute" />
+    <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+    <result column="ATTRIBUTE" jdbcType="VARCHAR" property="attribute" />
+    <result column="PHOTO" jdbcType="VARCHAR" property="photo" />
+    <result column="PURCHASE_CYCLE" jdbcType="VARCHAR" property="purchaseCycle" />
+  </resultMap>
+  <select id="getTMSs" resultType="TpmsMatStri" resultMap="BaseResultMap">
+        select * from WEBAPI.TPMS_MAT_STRI
+        where SERIAL_NUMBER &gt; #{p1} and SERIAL_NUMBER &lt; = (#{p1} + #{p2})
+        order by TID
+    </select>
+  <select id="getTMSBySNId" parameterType="int" resultType="TpmsMatInfo" resultMap="BaseResultMap">
+        select * from WEBAPI.TPMS_MAT_STRI where SERIAL_NUMBER = #{sn}
+  </select>
+  <insert id="insertFrTxt" parameterType="com.xtk.apistation.webapi.bean.TpmsMatStri">
+    insert into WEBAPI.TPMS_MAT_STRI (TID, SERIAL_NUMBER, FACTORY_CO, FACTORY_NAME,
+    DC_MATERIAL_NO, SVW_MATERIAL_NO, MIN_SAFETY_STOCK,
+    MAX_SAFETY_STOCK, REF_PRICE, TOTAL_INVENTORY,
+    SHARING, SAFETY_ID, PLACE_OF_PRODUCTION,
+    TOTAL_COLLECTION, ANNUAL_CONSUMPTION, ANNUAL_COLLECTION_TIMES,
+    HISTORICAL_COLLECTION_QUANTITY, MATERIAL_ATTRIBUTE,
+    REMARKS, ATTRIBUTE, PHOTO,
+    PURCHASE_CYCLE)
+    values (TPMS_MAT_STRI_ID.nextval, (select Max(SERIAL_NUMBER)+1 from WEBAPI.TPMS_MAT_STRI), #{factoryCo,jdbcType=VARCHAR}, #{factoryName,jdbcType=VARCHAR},
+    #{dcMaterialNo,jdbcType=VARCHAR}, #{svwMaterialNo,jdbcType=VARCHAR}, #{minSafetyStock,jdbcType=VARCHAR},
+    #{maxSafetyStock,jdbcType=VARCHAR}, #{refPrice,jdbcType=VARCHAR}, #{totalInventory,jdbcType=VARCHAR},
+    #{sharing,jdbcType=VARCHAR}, #{safetyId,jdbcType=VARCHAR}, #{placeOfProduction,jdbcType=VARCHAR},
+    #{totalCollection,jdbcType=VARCHAR}, #{annualConsumption,jdbcType=VARCHAR}, #{annualCollectionTimes,jdbcType=VARCHAR},
+    #{historicalCollectionQuantity,jdbcType=VARCHAR}, #{materialAttribute,jdbcType=VARCHAR},
+    #{remarks,jdbcType=VARCHAR}, #{attribute,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR},
+    #{purchaseCycle,jdbcType=VARCHAR})
+  </insert>
+<!--  -->
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    TID, SERIAL_NUMBER, FACTORY_CO, FACTORY_NAME, DC_MATERIAL_NO, SVW_MATERIAL_NO, MIN_SAFETY_STOCK, 
+    MAX_SAFETY_STOCK, REF_PRICE, TOTAL_INVENTORY, SHARING, SAFETY_ID, PLACE_OF_PRODUCTION, 
+    TOTAL_COLLECTION, ANNUAL_CONSUMPTION, ANNUAL_COLLECTION_TIMES, HISTORICAL_COLLECTION_QUANTITY, 
+    MATERIAL_ATTRIBUTE, REMARKS, `ATTRIBUTE`, PHOTO, PURCHASE_CYCLE
+  </sql>
+  <select id="selectByExample" parameterType="com.xtk.apistation.webapi.bean.TpmsMatStriExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from WEBAPI.TPMS_MAT_STRI
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from WEBAPI.TPMS_MAT_STRI
+    where TID = #{tid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from WEBAPI.TPMS_MAT_STRI
+    where TID = #{tid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xtk.apistation.webapi.bean.TpmsMatStriExample">
+    delete from WEBAPI.TPMS_MAT_STRI
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xtk.apistation.webapi.bean.TpmsMatStri">
+    <selectKey keyProperty="tid" order="AFTER" resultType="java.math.BigDecimal">
+      Oracle
+    </selectKey>
+    insert into WEBAPI.TPMS_MAT_STRI (SERIAL_NUMBER, FACTORY_CO, FACTORY_NAME, 
+      DC_MATERIAL_NO, SVW_MATERIAL_NO, MIN_SAFETY_STOCK, 
+      MAX_SAFETY_STOCK, REF_PRICE, TOTAL_INVENTORY, 
+      SHARING, SAFETY_ID, PLACE_OF_PRODUCTION, 
+      TOTAL_COLLECTION, ANNUAL_CONSUMPTION, ANNUAL_COLLECTION_TIMES, 
+      HISTORICAL_COLLECTION_QUANTITY, MATERIAL_ATTRIBUTE, 
+      REMARKS, `ATTRIBUTE`, PHOTO, 
+      PURCHASE_CYCLE)
+    values (#{serialNumber,jdbcType=DECIMAL}, #{factoryCo,jdbcType=VARCHAR}, #{factoryName,jdbcType=VARCHAR}, 
+      #{dcMaterialNo,jdbcType=VARCHAR}, #{svwMaterialNo,jdbcType=VARCHAR}, #{minSafetyStock,jdbcType=VARCHAR}, 
+      #{maxSafetyStock,jdbcType=VARCHAR}, #{refPrice,jdbcType=VARCHAR}, #{totalInventory,jdbcType=VARCHAR}, 
+      #{sharing,jdbcType=VARCHAR}, #{safetyId,jdbcType=VARCHAR}, #{placeOfProduction,jdbcType=VARCHAR}, 
+      #{totalCollection,jdbcType=VARCHAR}, #{annualConsumption,jdbcType=VARCHAR}, #{annualCollectionTimes,jdbcType=VARCHAR}, 
+      #{historicalCollectionQuantity,jdbcType=VARCHAR}, #{materialAttribute,jdbcType=VARCHAR}, 
+      #{remarks,jdbcType=VARCHAR}, #{attribute,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, 
+      #{purchaseCycle,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xtk.apistation.webapi.bean.TpmsMatStri">
+    <selectKey keyProperty="tid" order="AFTER" resultType="java.math.BigDecimal">
+      Oracle
+    </selectKey>
+    insert into WEBAPI.TPMS_MAT_STRI
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="serialNumber != null">
+        SERIAL_NUMBER,
+      </if>
+      <if test="factoryCo != null">
+        FACTORY_CO,
+      </if>
+      <if test="factoryName != null">
+        FACTORY_NAME,
+      </if>
+      <if test="dcMaterialNo != null">
+        DC_MATERIAL_NO,
+      </if>
+      <if test="svwMaterialNo != null">
+        SVW_MATERIAL_NO,
+      </if>
+      <if test="minSafetyStock != null">
+        MIN_SAFETY_STOCK,
+      </if>
+      <if test="maxSafetyStock != null">
+        MAX_SAFETY_STOCK,
+      </if>
+      <if test="refPrice != null">
+        REF_PRICE,
+      </if>
+      <if test="totalInventory != null">
+        TOTAL_INVENTORY,
+      </if>
+      <if test="sharing != null">
+        SHARING,
+      </if>
+      <if test="safetyId != null">
+        SAFETY_ID,
+      </if>
+      <if test="placeOfProduction != null">
+        PLACE_OF_PRODUCTION,
+      </if>
+      <if test="totalCollection != null">
+        TOTAL_COLLECTION,
+      </if>
+      <if test="annualConsumption != null">
+        ANNUAL_CONSUMPTION,
+      </if>
+      <if test="annualCollectionTimes != null">
+        ANNUAL_COLLECTION_TIMES,
+      </if>
+      <if test="historicalCollectionQuantity != null">
+        HISTORICAL_COLLECTION_QUANTITY,
+      </if>
+      <if test="materialAttribute != null">
+        MATERIAL_ATTRIBUTE,
+      </if>
+      <if test="remarks != null">
+        REMARKS,
+      </if>
+      <if test="attribute != null">
+        `ATTRIBUTE`,
+      </if>
+      <if test="photo != null">
+        PHOTO,
+      </if>
+      <if test="purchaseCycle != null">
+        PURCHASE_CYCLE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="serialNumber != null">
+        #{serialNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="factoryCo != null">
+        #{factoryCo,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryName != null">
+        #{factoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="dcMaterialNo != null">
+        #{dcMaterialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="svwMaterialNo != null">
+        #{svwMaterialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="minSafetyStock != null">
+        #{minSafetyStock,jdbcType=VARCHAR},
+      </if>
+      <if test="maxSafetyStock != null">
+        #{maxSafetyStock,jdbcType=VARCHAR},
+      </if>
+      <if test="refPrice != null">
+        #{refPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="totalInventory != null">
+        #{totalInventory,jdbcType=VARCHAR},
+      </if>
+      <if test="sharing != null">
+        #{sharing,jdbcType=VARCHAR},
+      </if>
+      <if test="safetyId != null">
+        #{safetyId,jdbcType=VARCHAR},
+      </if>
+      <if test="placeOfProduction != null">
+        #{placeOfProduction,jdbcType=VARCHAR},
+      </if>
+      <if test="totalCollection != null">
+        #{totalCollection,jdbcType=VARCHAR},
+      </if>
+      <if test="annualConsumption != null">
+        #{annualConsumption,jdbcType=VARCHAR},
+      </if>
+      <if test="annualCollectionTimes != null">
+        #{annualCollectionTimes,jdbcType=VARCHAR},
+      </if>
+      <if test="historicalCollectionQuantity != null">
+        #{historicalCollectionQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="materialAttribute != null">
+        #{materialAttribute,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="attribute != null">
+        #{attribute,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseCycle != null">
+        #{purchaseCycle,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xtk.apistation.webapi.bean.TpmsMatStriExample" resultType="java.lang.Long">
+    select count(*) from WEBAPI.TPMS_MAT_STRI
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update WEBAPI.TPMS_MAT_STRI
+    <set>
+      <if test="record.tid != null">
+        TID = #{record.tid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.serialNumber != null">
+        SERIAL_NUMBER = #{record.serialNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="record.factoryCo != null">
+        FACTORY_CO = #{record.factoryCo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.factoryName != null">
+        FACTORY_NAME = #{record.factoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dcMaterialNo != null">
+        DC_MATERIAL_NO = #{record.dcMaterialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.svwMaterialNo != null">
+        SVW_MATERIAL_NO = #{record.svwMaterialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minSafetyStock != null">
+        MIN_SAFETY_STOCK = #{record.minSafetyStock,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maxSafetyStock != null">
+        MAX_SAFETY_STOCK = #{record.maxSafetyStock,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refPrice != null">
+        REF_PRICE = #{record.refPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalInventory != null">
+        TOTAL_INVENTORY = #{record.totalInventory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sharing != null">
+        SHARING = #{record.sharing,jdbcType=VARCHAR},
+      </if>
+      <if test="record.safetyId != null">
+        SAFETY_ID = #{record.safetyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.placeOfProduction != null">
+        PLACE_OF_PRODUCTION = #{record.placeOfProduction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalCollection != null">
+        TOTAL_COLLECTION = #{record.totalCollection,jdbcType=VARCHAR},
+      </if>
+      <if test="record.annualConsumption != null">
+        ANNUAL_CONSUMPTION = #{record.annualConsumption,jdbcType=VARCHAR},
+      </if>
+      <if test="record.annualCollectionTimes != null">
+        ANNUAL_COLLECTION_TIMES = #{record.annualCollectionTimes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.historicalCollectionQuantity != null">
+        HISTORICAL_COLLECTION_QUANTITY = #{record.historicalCollectionQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialAttribute != null">
+        MATERIAL_ATTRIBUTE = #{record.materialAttribute,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null">
+        REMARKS = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attribute != null">
+        `ATTRIBUTE` = #{record.attribute,jdbcType=VARCHAR},
+      </if>
+      <if test="record.photo != null">
+        PHOTO = #{record.photo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purchaseCycle != null">
+        PURCHASE_CYCLE = #{record.purchaseCycle,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update WEBAPI.TPMS_MAT_STRI
+    set TID = #{record.tid,jdbcType=DECIMAL},
+      SERIAL_NUMBER = #{record.serialNumber,jdbcType=DECIMAL},
+      FACTORY_CO = #{record.factoryCo,jdbcType=VARCHAR},
+      FACTORY_NAME = #{record.factoryName,jdbcType=VARCHAR},
+      DC_MATERIAL_NO = #{record.dcMaterialNo,jdbcType=VARCHAR},
+      SVW_MATERIAL_NO = #{record.svwMaterialNo,jdbcType=VARCHAR},
+      MIN_SAFETY_STOCK = #{record.minSafetyStock,jdbcType=VARCHAR},
+      MAX_SAFETY_STOCK = #{record.maxSafetyStock,jdbcType=VARCHAR},
+      REF_PRICE = #{record.refPrice,jdbcType=VARCHAR},
+      TOTAL_INVENTORY = #{record.totalInventory,jdbcType=VARCHAR},
+      SHARING = #{record.sharing,jdbcType=VARCHAR},
+      SAFETY_ID = #{record.safetyId,jdbcType=VARCHAR},
+      PLACE_OF_PRODUCTION = #{record.placeOfProduction,jdbcType=VARCHAR},
+      TOTAL_COLLECTION = #{record.totalCollection,jdbcType=VARCHAR},
+      ANNUAL_CONSUMPTION = #{record.annualConsumption,jdbcType=VARCHAR},
+      ANNUAL_COLLECTION_TIMES = #{record.annualCollectionTimes,jdbcType=VARCHAR},
+      HISTORICAL_COLLECTION_QUANTITY = #{record.historicalCollectionQuantity,jdbcType=VARCHAR},
+      MATERIAL_ATTRIBUTE = #{record.materialAttribute,jdbcType=VARCHAR},
+      REMARKS = #{record.remarks,jdbcType=VARCHAR},
+      `ATTRIBUTE` = #{record.attribute,jdbcType=VARCHAR},
+      PHOTO = #{record.photo,jdbcType=VARCHAR},
+      PURCHASE_CYCLE = #{record.purchaseCycle,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xtk.apistation.webapi.bean.TpmsMatStri">
+    update WEBAPI.TPMS_MAT_STRI
+    <set>
+      <if test="serialNumber != null">
+        SERIAL_NUMBER = #{serialNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="factoryCo != null">
+        FACTORY_CO = #{factoryCo,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryName != null">
+        FACTORY_NAME = #{factoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="dcMaterialNo != null">
+        DC_MATERIAL_NO = #{dcMaterialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="svwMaterialNo != null">
+        SVW_MATERIAL_NO = #{svwMaterialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="minSafetyStock != null">
+        MIN_SAFETY_STOCK = #{minSafetyStock,jdbcType=VARCHAR},
+      </if>
+      <if test="maxSafetyStock != null">
+        MAX_SAFETY_STOCK = #{maxSafetyStock,jdbcType=VARCHAR},
+      </if>
+      <if test="refPrice != null">
+        REF_PRICE = #{refPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="totalInventory != null">
+        TOTAL_INVENTORY = #{totalInventory,jdbcType=VARCHAR},
+      </if>
+      <if test="sharing != null">
+        SHARING = #{sharing,jdbcType=VARCHAR},
+      </if>
+      <if test="safetyId != null">
+        SAFETY_ID = #{safetyId,jdbcType=VARCHAR},
+      </if>
+      <if test="placeOfProduction != null">
+        PLACE_OF_PRODUCTION = #{placeOfProduction,jdbcType=VARCHAR},
+      </if>
+      <if test="totalCollection != null">
+        TOTAL_COLLECTION = #{totalCollection,jdbcType=VARCHAR},
+      </if>
+      <if test="annualConsumption != null">
+        ANNUAL_CONSUMPTION = #{annualConsumption,jdbcType=VARCHAR},
+      </if>
+      <if test="annualCollectionTimes != null">
+        ANNUAL_COLLECTION_TIMES = #{annualCollectionTimes,jdbcType=VARCHAR},
+      </if>
+      <if test="historicalCollectionQuantity != null">
+        HISTORICAL_COLLECTION_QUANTITY = #{historicalCollectionQuantity,jdbcType=VARCHAR},
+      </if>
+      <if test="materialAttribute != null">
+        MATERIAL_ATTRIBUTE = #{materialAttribute,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="attribute != null">
+        `ATTRIBUTE` = #{attribute,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        PHOTO = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseCycle != null">
+        PURCHASE_CYCLE = #{purchaseCycle,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TID = #{tid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xtk.apistation.webapi.bean.TpmsMatStri">
+    update WEBAPI.TPMS_MAT_STRI
+    set SERIAL_NUMBER = #{serialNumber,jdbcType=DECIMAL},
+      FACTORY_CO = #{factoryCo,jdbcType=VARCHAR},
+      FACTORY_NAME = #{factoryName,jdbcType=VARCHAR},
+      DC_MATERIAL_NO = #{dcMaterialNo,jdbcType=VARCHAR},
+      SVW_MATERIAL_NO = #{svwMaterialNo,jdbcType=VARCHAR},
+      MIN_SAFETY_STOCK = #{minSafetyStock,jdbcType=VARCHAR},
+      MAX_SAFETY_STOCK = #{maxSafetyStock,jdbcType=VARCHAR},
+      REF_PRICE = #{refPrice,jdbcType=VARCHAR},
+      TOTAL_INVENTORY = #{totalInventory,jdbcType=VARCHAR},
+      SHARING = #{sharing,jdbcType=VARCHAR},
+      SAFETY_ID = #{safetyId,jdbcType=VARCHAR},
+      PLACE_OF_PRODUCTION = #{placeOfProduction,jdbcType=VARCHAR},
+      TOTAL_COLLECTION = #{totalCollection,jdbcType=VARCHAR},
+      ANNUAL_CONSUMPTION = #{annualConsumption,jdbcType=VARCHAR},
+      ANNUAL_COLLECTION_TIMES = #{annualCollectionTimes,jdbcType=VARCHAR},
+      HISTORICAL_COLLECTION_QUANTITY = #{historicalCollectionQuantity,jdbcType=VARCHAR},
+      MATERIAL_ATTRIBUTE = #{materialAttribute,jdbcType=VARCHAR},
+      REMARKS = #{remarks,jdbcType=VARCHAR},
+      `ATTRIBUTE` = #{attribute,jdbcType=VARCHAR},
+      PHOTO = #{photo,jdbcType=VARCHAR},
+      PURCHASE_CYCLE = #{purchaseCycle,jdbcType=VARCHAR}
+    where TID = #{tid,jdbcType=DECIMAL}
+  </update>
+</mapper>

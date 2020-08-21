@@ -365,6 +365,42 @@ public class Controller {
         return responseResult;
     }
 
+    // TPMS_MatStri -- 备件属性数据接口
+    @RequestMapping(method = RequestMethod.POST, value = "/TpmsMatStri")
+    public ResponseResult getTMSs(@RequestBody String name){
+        ResponseResult responseResult;
+        List<TpmsMatStri> listTpmsMatStri = new ArrayList<>();
+        TpmsMatStri tpmsMatStri;
+
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        try{
+            TpmsMatStriMapper tpmsMatStriMapper = sqlSession.getMapper(TpmsMatStriMapper.class);
+            JSONObject jsonObject = JSON.parseObject(name);
+            int SerialNumber = jsonObject.getInteger("SerialNumber");
+            int MaxCount = jsonObject.getInteger("MaxCount");
+            if (jsonObject.get("SpecifiedNumber") == null) {
+                System.out.println("SpcifiedNumber is null");
+                // 返回增量
+                listTpmsMatStri = tpmsMatStriMapper.getTMSs(SerialNumber, MaxCount);
+            }else{
+                int SpecifiedNumber = jsonObject.getInteger("SpecifiedNumber");
+                // 返回特定
+                tpmsMatStri = tpmsMatStriMapper.getTMSBySNId(SpecifiedNumber);
+                listTpmsMatStri.add(tpmsMatStri);
+            }
+            responseResult = ResponseResult.success(listTpmsMatStri);
+            sqlSession.commit();
+        }finally {
+            sqlSession.close();
+        }
+        // ...
+        this.logger.info("TpmsMatInfo.msg: " + responseResult.msg);
+        this.logger.info("TpmsMatInfo.Result: " + responseResult.success);
+        // ...
+        return responseResult;
+    }
+
     //RequestBody这个注解可以接收json数据
 //    @RequestMapping(method = RequestMethod.POST,value = "/postest")
 //    public List<User> postTest(@RequestBody String name){
