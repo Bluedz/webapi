@@ -21,6 +21,7 @@
         <typeAlias alias="LogOfImport" type="com.xtk.apistation.webapi.bean.LogOfImport"/>
         <!-- TPMS+ -->
         <typeAlias alias="TpmsMatInfo" type="com.xtk.apistation.webapi.bean.TpmsMatInfo"/>
+        <typeAlias alias="TpmsMatStri" type="com.xtk.apistation.webapi.bean.TpmsMatStri" />
         <!-- TPMS- -->
     </typeAliases>
     <!--环境配置-->
@@ -48,6 +49,7 @@
         <mapper resource="mappers/MatRequestMapper.xml" />
 <!-- TPMS+ -->
         <mapper resource="mappers/TpmsMatInfoMapper.xml" />
+        <mapper resource="mappers/TpmsMatStriMapper.xml" />
 <!-- TPMS- -->
         <mapper resource="mappers/LogOfImportMapper.xml" />
     </mappers>
