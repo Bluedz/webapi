@@ -42,7 +42,7 @@
     HISTORICAL_COLLECTION_QUANTITY, MATERIAL_ATTRIBUTE,
     REMARKS, ATTRIBUTE, PHOTO,
     PURCHASE_CYCLE)
-    values (TPMS_MAT_STRI_ID.nextval, (select Max(SERIAL_NUMBER)+1 from WEBAPI.TPMS_MAT_STRI), #{factoryCo,jdbcType=VARCHAR}, #{factoryName,jdbcType=VARCHAR},
+    values (TPMS_MAT_STRI_ID.nextval, ( select serial_number+1 from  tpms_mat_stri where tid = (select  max(tid) from tpms_mat_stri)), #{factoryCo,jdbcType=VARCHAR}, #{factoryName,jdbcType=VARCHAR},
     #{dcMaterialNo,jdbcType=VARCHAR}, #{svwMaterialNo,jdbcType=VARCHAR}, #{minSafetyStock,jdbcType=VARCHAR},
     #{maxSafetyStock,jdbcType=VARCHAR}, #{refPrice,jdbcType=VARCHAR}, #{totalInventory,jdbcType=VARCHAR},
     #{sharing,jdbcType=VARCHAR}, #{safetyId,jdbcType=VARCHAR}, #{placeOfProduction,jdbcType=VARCHAR},
@@ -51,6 +51,24 @@
     #{remarks,jdbcType=VARCHAR}, #{attribute,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR},
     #{purchaseCycle,jdbcType=VARCHAR})
   </insert>
+<!--  <insert id="insertFrTxt" parameterType="com.xtk.apistation.webapi.bean.TpmsMatStri">-->
+<!--    insert into WEBAPI.TPMS_MAT_STRI (TID, SERIAL_NUMBER, FACTORY_CO, FACTORY_NAME,-->
+<!--    DC_MATERIAL_NO, SVW_MATERIAL_NO, MIN_SAFETY_STOCK,-->
+<!--    MAX_SAFETY_STOCK, REF_PRICE, TOTAL_INVENTORY,-->
+<!--    SHARING, SAFETY_ID, PLACE_OF_PRODUCTION,-->
+<!--    TOTAL_COLLECTION, ANNUAL_CONSUMPTION, ANNUAL_COLLECTION_TIMES,-->
+<!--    HISTORICAL_COLLECTION_QUANTITY, MATERIAL_ATTRIBUTE,-->
+<!--    REMARKS, ATTRIBUTE, PHOTO,-->
+<!--    PURCHASE_CYCLE)-->
+<!--    values (TPMS_MAT_STRI_ID.nextval, (select Max(SERIAL_NUMBER)+1 from WEBAPI.TPMS_MAT_STRI), #{factoryCo,jdbcType=VARCHAR}, #{factoryName,jdbcType=VARCHAR},-->
+<!--    #{dcMaterialNo,jdbcType=VARCHAR}, #{svwMaterialNo,jdbcType=VARCHAR}, #{minSafetyStock,jdbcType=VARCHAR},-->
+<!--    #{maxSafetyStock,jdbcType=VARCHAR}, #{refPrice,jdbcType=VARCHAR}, #{totalInventory,jdbcType=VARCHAR},-->
+<!--    #{sharing,jdbcType=VARCHAR}, #{safetyId,jdbcType=VARCHAR}, #{placeOfProduction,jdbcType=VARCHAR},-->
+<!--    #{totalCollection,jdbcType=VARCHAR}, #{annualConsumption,jdbcType=VARCHAR}, #{annualCollectionTimes,jdbcType=VARCHAR},-->
+<!--    #{historicalCollectionQuantity,jdbcType=VARCHAR}, #{materialAttribute,jdbcType=VARCHAR},-->
+<!--    #{remarks,jdbcType=VARCHAR}, #{attribute,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR},-->
+<!--    #{purchaseCycle,jdbcType=VARCHAR})-->
+<!--  </insert>-->
 <!--  -->
   <sql id="Example_Where_Clause">
     <where>

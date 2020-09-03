@@ -185,7 +185,7 @@ public class TryWrDB {
                 break;
             }
             default :
-                System.out.println("未知");
+                System.out.println("未知文件路径");
         }
 
 /*        // MatFactoryAttr
