@@ -12,9 +12,17 @@ public class GetFileList {
         File file = new File(path);
         File[] tempList = file.listFiles();
 
+        String tempStr, tempStrFileExend; // 判断并排除非txt
+
         for (File value : tempList) {
             if (value.isFile()) {
-                files.add(value.toString());
+                // 判断并排除非txt
+                tempStr = value.toString().toLowerCase();
+                tempStrFileExend = tempStr.substring(tempStr.length()-3);
+                if(tempStrFileExend!="txt" & ! tempStrFileExend.equals("txt")){
+                    System.out.println("file extend name is not 'TXT'");
+                }
+                else  files.add(value.toString());
                 //文件名，不包含路径
                 //String fileName = tempList[i].getName();
             }

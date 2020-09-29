@@ -1,26 +1,24 @@
 package com.xtk.apistation.webapi.impdata;
 
-import com.xtk.apistation.webapi.bean.LogOfImport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Properties;
 
-public class Dotxt2db<main> {
+public class Dotxt2db_tpmsMatStri<main> {
     // def log
     private  Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // init
     private static String[] folderList = {
-            "MatAccounts"
-            , "MatFactoryAttr", "MatInfor", "MatPurchasingStatus", "MatRequestResult"
-//            , "tpms_Matinfo"
+            "tpms_Matstri"
+//            "tst_tpms_Matstri"
+//            "tst_tpms_Matinfo"
+//            "MatAccounts", "MatFactoryAttr", "MatInfor", "MatPurchasingStatus", "MatRequestResult"
     }; //  MatFactoryAttr
     public  static String root ;
     public  static String bakRoot ;
@@ -29,7 +27,7 @@ public class Dotxt2db<main> {
         InputStream in;
         Properties pt = new Properties();
         try {
-            in = Dotxt2db.class.getClassLoader().getResourceAsStream("localKey.properties");
+            in = Dotxt2db_tpmsMatStri.class.getClassLoader().getResourceAsStream("localKey.properties");
             pt.load(in);
         } catch (IOException e) {
             e.printStackTrace();
@@ -70,12 +68,13 @@ public class Dotxt2db<main> {
                     for(String lineTxt:linesOfFile) { // get each line of file
                         String originalLineTxt = lineTxt;
                         // clear line
-                        lineTxt = new Dotxt2db().delSpaceChar(lineTxt);
-                        lineTxt = new Dotxt2db().fillLastSpace(lineTxt);
+                        lineTxt = new Dotxt2db_tpmsMatStri().delSpaceChar(lineTxt);
+                        lineTxt = new Dotxt2db_tpmsMatStri().fillLastSpace(lineTxt);
                         if("MatRequestResult".equals(folder))
                             lineTxt = i++ + "@" + lineTxt;
                         String[] str = lineTxt.split("@");
                         String lineNum = str[0];
+                        if (lineNum.equals("序号") ) continue;
                         String lineCont = lineTxt.substring(lineTxt.indexOf("@") + 1);
 //                 String lineCont = lineTxt.substring(lineTxt.indexOf("@")*2 + 1 + 1); //为满足错误txt
                         System.out.println("\n" + fileName);
@@ -90,6 +89,7 @@ public class Dotxt2db<main> {
                         if(!flag)
                             isErr = flag;
                         //build log obj, 并写入记录，log输出结果
+/*
                         LogOfImport loi = new LogOfImport();
                         loi.setNameOfTxtfile( fileName );
                         loi.setNameOfInterface( folderName );
@@ -99,7 +99,7 @@ public class Dotxt2db<main> {
                         loi.setErrorMessage(tryWrDB.errorMeg);
                         this.logger.info( "ImpR:---  " +
                                 new ImpRecord().insertRecord(loi)
-                        );
+                        );*/
 
                         // log 输出结果
                         this.logger.info("Result : " + flag);
@@ -157,7 +157,7 @@ public class Dotxt2db<main> {
     }
 
     public static void main(String[] args) throws Exception {
-        Dotxt2db doTxt2DB = new Dotxt2db();
+        Dotxt2db_tpmsMatStri doTxt2DB = new Dotxt2db_tpmsMatStri();
         for(String folder:folderList) {
             doTxt2DB.doIt(folder);
         }

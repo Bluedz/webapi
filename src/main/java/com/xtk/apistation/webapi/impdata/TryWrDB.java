@@ -45,7 +45,7 @@ public class TryWrDB {
     public void makeObject( SqlSession sqlSession, String[] arrList, String folderName){
         switch(folderName) {
             // TPMS+
-            case "tst_tpms_Matinfo":{
+            case "tpms_Matinfo":{
                 TpmsMatInfo tmi = new TpmsMatInfo();
                 tmi.setDcMatnum(arrList[0]);
                 tmi.setSvwMatnum(arrList[1]);
@@ -67,7 +67,7 @@ public class TryWrDB {
                 // System.out.println("tst_tpms_Matinfo");
                 break;
             }
-            case "tst_tpms_Matstri":{
+            case "tpms_Matstri":{
                 TpmsMatStri tms = new TpmsMatStri();
                 tms.setFactoryCo(arrList[0]);
                 tms.setFactoryName(arrList[1]);
