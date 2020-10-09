@@ -10,6 +10,11 @@ public interface TpmsMatStriMapper {
     public List<TpmsMatStri> getTMSs(int p1, int p2);
     public TpmsMatStri getTMSBySNId(int sn);
     public boolean insertFrTxt(TpmsMatStri record);
+
+    //
+    public  void dropSequence();
+    public void initSequence();
+    public void initTable();
     //
 
 

@@ -20,7 +20,7 @@ public class Dotxt2db<main> {
     private static String[] folderList = {
             "MatAccounts"
             , "MatFactoryAttr", "MatInfor", "MatPurchasingStatus", "MatRequestResult"
-//            , "tpms_Matinfo"
+            , "tpms_Matinfo"
     }; //  MatFactoryAttr
     public  static String root ;
     public  static String bakRoot ;

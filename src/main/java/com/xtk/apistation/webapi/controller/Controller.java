@@ -401,6 +401,13 @@ public class Controller {
         return responseResult;
     }
 
+    // TPMS_MatStri -- 备件属性数据接口
+/*    @RequestMapping(method = RequestMethod.POST, value = "/tst")
+    public ResponseResult tst(@RequestBody String name){
+
+    }*/
+
+
     //RequestBody这个注解可以接收json数据
 //    @RequestMapping(method = RequestMethod.POST,value = "/postest")
 //    public List<User> postTest(@RequestBody String name){
