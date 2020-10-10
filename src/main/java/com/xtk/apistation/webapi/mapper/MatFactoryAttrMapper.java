@@ -1,7 +1,7 @@
 package com.xtk.apistation.webapi.mapper;
 
 import com.xtk.apistation.webapi.bean.MatFactoryAttr;
-// import generator.MatFactoryAttrExample;
+// import com.xtk.apistation.webapi.bean.MatFactoryAttrExample;
 
 import java.util.List;
 

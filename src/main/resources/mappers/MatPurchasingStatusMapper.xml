@@ -87,7 +87,7 @@
   <sql id="Base_Column_List">
     TID, SERIAL_NUMBER, REQUEST_ID, REQUEST_NUM, NODE_STATS, NODE_TIME
   </sql>
-  <select id="selectByExample" parameterType="generator.MatPurchasingStatusExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.xtk.apistation.webapi.bean.MatPurchasingStatusExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -101,7 +101,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="generator.MatPurchasingStatusExample">
+  <delete id="deleteByExample" parameterType="com.xtk.apistation.webapi.bean.MatPurchasingStatusExample">
     delete from WEBAPI.MAT_PURCHASING_STATUS
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -158,7 +158,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="generator.MatPurchasingStatusExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.xtk.apistation.webapi.bean.MatPurchasingStatusExample" resultType="java.lang.Long">
     select count(*) from WEBAPI.MAT_PURCHASING_STATUS
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

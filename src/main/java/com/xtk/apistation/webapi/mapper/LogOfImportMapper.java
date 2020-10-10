@@ -3,7 +3,7 @@ package com.xtk.apistation.webapi.mapper;
 import com.xtk.apistation.webapi.bean.LogOfImport;
 
 import java.util.List;
-// import generator.LogOfImportExample;
+// import com.xtk.apistation.webapi.bean.LogOfImportExample;
 
 
 public interface LogOfImportMapper {

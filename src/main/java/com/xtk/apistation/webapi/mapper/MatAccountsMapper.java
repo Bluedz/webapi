@@ -1,7 +1,7 @@
 package com.xtk.apistation.webapi.mapper;
 
 import com.xtk.apistation.webapi.bean.MatAccounts;
-// import generator.MatAccountsExample;
+// import com.xtk.apistation.webapi.bean.MatAccountsExample;
 
 import java.util.List;
 

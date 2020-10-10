@@ -1,7 +1,7 @@
 package com.xtk.apistation.webapi.mapper;
 
 import com.xtk.apistation.webapi.bean.MatRequestResult;
-// import generator.MatRequestResultExample;
+// import com.xtk.apistation.webapi.bean.MatRequestResultExample;
 
 import java.util.List;
 

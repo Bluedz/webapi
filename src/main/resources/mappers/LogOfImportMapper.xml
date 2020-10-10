@@ -92,7 +92,7 @@
     TID, IMPORT_TIME, NAME_OF_INTERFACE, NAME_OF_TXTFILE, NUMBER_OF_LINE, CONTENT_OF_ONELINE, 
     RESULT_OF_IMPORT, ERROR_MESSAGE
   </sql>
-  <select id="selectByExample" parameterType="generator.LogOfImportExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.xtk.apistation.webapi.bean.LogOfImportExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -106,7 +106,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="generator.LogOfImportExample">
+  <delete id="deleteByExample" parameterType="com.xtk.apistation.webapi.bean.LogOfImportExample">
     delete from WEBAPI.LOG_OF_IMPORT
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -168,7 +168,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="generator.LogOfImportExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.xtk.apistation.webapi.bean.LogOfImportExample" resultType="java.lang.Long">
     select count(*) from WEBAPI.LOG_OF_IMPORT
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

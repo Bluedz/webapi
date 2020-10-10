@@ -111,7 +111,7 @@
     TID, SERIAL_NUMBER, DC_MATNUM, SVW_MATNUM, UNIT, DESC_SPEC, OG_SPEC, MFR, MFR_NO,
     EQUIP_MFR, EQUIP_MFR_NO, EQUIP_NO, DIAGRAM_NO, PROD_CODE_DESC, ABC_CODE, PLANNER_CODE
   </sql>
-  <select id="selectByExample" parameterType="generator.TpmsMatInfoExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.xtk.apistation.webapi.bean.TpmsMatInfoExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -125,7 +125,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="generator.TpmsMatInfoExample">
+  <delete id="deleteByExample" parameterType="com.xtk.apistation.webapi.bean.TpmsMatInfoExample">
     delete from WEBAPI.TPMS_MAT_INFO
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -248,7 +248,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="generator.TpmsMatInfoExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.xtk.apistation.webapi.bean.TpmsMatInfoExample" resultType="java.lang.Long">
     select count(*) from WEBAPI.TPMS_MAT_INFO
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

@@ -1,7 +1,7 @@
 package com.xtk.apistation.webapi.mapper;
 
 import com.xtk.apistation.webapi.bean.MatPurchasingStatus;
-// import generator.MatPurchasingStatusExample;
+// import com.xtk.apistation.webapi.bean.MatPurchasingStatusExample;
 
 import java.util.List;
 
