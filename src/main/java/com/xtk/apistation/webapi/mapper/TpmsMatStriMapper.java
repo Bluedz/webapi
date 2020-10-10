@@ -12,9 +12,10 @@ public interface TpmsMatStriMapper {
     public boolean insertFrTxt(TpmsMatStri record);
 
     //
-    public  void dropSequence();
-    public void initSequence();
-    public void initTable();
+    public String existSequence(@Param("sqName") String name);
+    public  void dropSequence(@Param("sqName") String name);
+    public void initSequence(@Param("sqName") String name);
+    public void initTable(@Param("startID") Integer SID);
     //
 
 

@@ -1,5 +1,6 @@
 package com.xtk.apistation.webapi.impdata;
 
+import com.xtk.apistation.webapi.service.TpmsMatStriService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,6 +60,13 @@ public class Dotxt2db_tpmsMatStri<main> {
         List<String> linesOfFile;
 
         fileList = GetFileList.getFiles(path); // get file list in one folder
+
+        // 如果有新文件清空数据导入表并初始化sequence
+        if(fileList.size() > 0){
+            TpmsMatStriService tpmsMatStriService = new TpmsMatStriService();
+            tpmsMatStriService.InitTpmsMatStri("TPMS_MAT_STRI_ID", 1);
+        }
+
         for(String fileName:fileList) { // get each file in file list
             try {
                 linesOfFile = GetEveryLinesOfTxt.getLineTxt(fileName);

@@ -51,20 +51,25 @@
     #{remarks,jdbcType=VARCHAR}, #{attribute,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR},
     #{purchaseCycle,jdbcType=VARCHAR})
   </insert>
-  <update id="dropSequence">
-    drop sequence  Tst
+
+  <update id="dropSequence" parameterType="java.lang.String">
+    drop sequence ${sqName}
   </update>
-  <update id="initSequence">
-    create sequence Tst
+  <select id="existSequence" parameterType="java.lang.String" resultType="java.lang.String">
+    select sequence_name from user_sequences where sequence_name= ${sqName}
+  </select>
+  <update id="initSequence" parameterType="java.lang.String">
+    create sequence ${sqName}
     minvalue 1
     maxvalue 9999999999999999999999999999
     start with 2
     increment by 1
     cache 20
   </update>
-  <delete id="initTable" >
-    delete from WEBAPI.TPMS_MAT_STRI where tid > 10
+  <delete id="initTable" parameterType="java.lang.Integer">
+    delete from WEBAPI.TPMS_MAT_STRI where tid > #{startID}
   </delete>
+
 <!--  <insert id="insertFrTxt" parameterType="com.xtk.apistation.webapi.bean.TpmsMatStri">-->
 <!--    insert into WEBAPI.TPMS_MAT_STRI (TID, SERIAL_NUMBER, FACTORY_CO, FACTORY_NAME,-->
 <!--    DC_MATERIAL_NO, SVW_MATERIAL_NO, MIN_SAFETY_STOCK,-->

@@ -1,37 +1,18 @@
-package com.xtk.apistation.webapi;
+package com.xtk.apistation.webapi.service;
 
 import com.xtk.apistation.webapi.mapper.TpmsMatStriMapper;
-import com.xtk.apistation.webapi.bean.TpmsMatStri;
 import com.xtk.apistation.webapi.singleton.SingletonMybatis;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.ImportResource;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.annotation.Resource;
-
-@ImportResource(locations = "classpath*:/spring-mybatis.xml")
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = WebapiApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class WebapiApplicationTests {
-
-    @Test
-    public void contextLoads() {
-    }
-
-
+public class TpmsMatStriService {
 
     private static SqlSessionFactory sqlSessionFactory;
     static {
         sqlSessionFactory =  SingletonMybatis.getSqlSessionFactory();
     }
 
-    @Test
-    public void tstInitSequ(){
+    public void InitTpmsMatStri(String sqName, Integer SID){
         SqlSession sqlSession = sqlSessionFactory.openSession();
         try {
 
@@ -41,11 +22,12 @@ public class WebapiApplicationTests {
             tpmsMatStriMapper.dropSequence();
             tpmsMatStriMapper.initSequence();
             tpmsMatStriMapper.initTable();//getTMSBySNId(10); //
+            String sqName = "TST";
+            Integer SID = 9;
             */
 
             TpmsMatStriMapper tpmsMatStriMapper = sqlSession.getMapper(TpmsMatStriMapper.class);
-            String sqName = "TST";
-            Integer SID = 9;
+
             String sequenceName = tpmsMatStriMapper.existSequence("'"+sqName+"'");
             if( sequenceName!=null & !"".equals(sequenceName) ){
                 tpmsMatStriMapper.dropSequence(sqName);
@@ -59,7 +41,5 @@ public class WebapiApplicationTests {
             sqlSession.close();
         }
 
-
     }
-
 }
