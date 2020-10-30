@@ -2,14 +2,17 @@ package com.xtk.apistation.webapi;
 
 import com.xtk.apistation.webapi.mapper.TpmsMatStriMapper;
 import com.xtk.apistation.webapi.bean.TpmsMatStri;
+import com.xtk.apistation.webapi.service.EmailActionService;
 import com.xtk.apistation.webapi.singleton.SingletonMybatis;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
@@ -60,6 +63,16 @@ public class WebapiApplicationTests {
         }
 
 
+    }
+
+    @Value("${spring.mail.username}")
+    private String sendName;
+    @Autowired
+    private JavaMailSender mailSender;
+    @Test
+    public void tstSimpleMail(){
+        EmailActionService emailActionService = new EmailActionService(mailSender, sendName);
+        emailActionService.sendSimpleMsg("sts201", "zhaoyuheng@setechchina.com", "zhuti");
     }
 
 }

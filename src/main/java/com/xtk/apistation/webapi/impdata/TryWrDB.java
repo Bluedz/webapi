@@ -1,13 +1,17 @@
 package com.xtk.apistation.webapi.impdata;
 
 
+import com.xtk.apistation.webapi.Mails.MailTemplate;
+import com.xtk.apistation.webapi.Mails.SendMail;
 import com.xtk.apistation.webapi.mapper.*;
 import com.xtk.apistation.webapi.bean.*;
 import com.xtk.apistation.webapi.singleton.SingletonMybatis;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class TryWrDB {
     private static SqlSessionFactory sqlSessionFactory;
@@ -174,6 +178,15 @@ public class TryWrDB {
                 MatRequestResultMapper matRequestResultMapper = sqlSession.getMapper(MatRequestResultMapper.class);
                 matRequestResultMapper.insert(mrr);
                 // System.out.println("MatRequestResult");
+                if (Objects.equals(mrr.getCustResult(), "1")){
+                    String sendName = "saic_pms_remind@setechchina.com";
+                    MailTemplate mailTemplate = new MailTemplate();
+                    mailTemplate.buildSimpleContent1(arrList[0]);
+                    String message = mailTemplate.getMailContent();
+                    String subj = mailTemplate.getMailSubject();
+                    new SendMail().sendSimpleMail(sendName, message, subj);
+                }
+                //
                 break;
             }
             case "User" : {
