@@ -17,7 +17,7 @@ public class SendMail {
 
     private JavaMailSender mailSender;
     // ************
-    private static String emailto = "zhaoyuheng@setechchina.com";
+    private static String[] emailto = {"zhaoyuheng@setechchina.com", "yuhengzhao29@hotmail.com"};
     // ************
 //    private static String subject = "PMS申请通过提醒";
 
@@ -42,10 +42,17 @@ public class SendMail {
         String sendName = "saic_pms_remind@setechchina.com";
 //        String message = "编号为" + "x" + "的领料或订购申请已通过，请去styeline开始后续步骤处理。";
         MailTemplate mailTemplate = new MailTemplate();
-        mailTemplate.buildSimpleContent1("xx2");
+        mailTemplate.buildSimpleContent1("xx3");
         String message = mailTemplate.getMailContent();
         String subj = mailTemplate.getMailSubject();
         new SendMail().sendSimpleMail(sendName, message, subj);
+
+/*
+        String str = "'ss'\\, 'dd'"; // "\"ss\", \"dd\"";
+        String[] tt = new String[]{str};
+        String[] tt2 = new String[]{"ss", "dd"};
+        System.out.println(tt[0]+ " : " +tt2[0]);
+*/
 
     }
 }

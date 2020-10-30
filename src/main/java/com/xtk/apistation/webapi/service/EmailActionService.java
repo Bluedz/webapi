@@ -12,7 +12,7 @@ public class EmailActionService {
         this.sendName = sn;
     }
 
-    public String sendSimpleMsg(String msg, String email, String subject){
+    public String sendSimpleMsg(String msg, String[] email, String subject){
         if (StringUtils.isEmpty(msg) || StringUtils.isEmpty(email)){
             return "请输入要发送消息和目标邮箱";
         }
@@ -20,10 +20,13 @@ public class EmailActionService {
         try{
             SimpleMailMessage mail = new SimpleMailMessage();
             mail.setFrom(sendName);
-            mail.setTo(email);
             mail.setSubject(subject);
             mail.setText(msg);
-            mailSender.send(mail);
+            for(int i=0; i < email.length; i++){
+                mail.setTo(email[i]);
+                mailSender.send(mail);
+            }
+
             return "Mail发送成功";
         }catch (Exception ex){
             ex.printStackTrace();

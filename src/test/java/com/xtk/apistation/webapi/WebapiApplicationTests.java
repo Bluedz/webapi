@@ -72,7 +72,7 @@ public class WebapiApplicationTests {
     @Test
     public void tstSimpleMail(){
         EmailActionService emailActionService = new EmailActionService(mailSender, sendName);
-        emailActionService.sendSimpleMsg("sts201", "zhaoyuheng@setechchina.com", "zhuti");
+//        emailActionService.sendSimpleMsg("sts201", {"zhaoyuheng@setechchina.com", "ss"}, "zhuti");
     }
 
 }
