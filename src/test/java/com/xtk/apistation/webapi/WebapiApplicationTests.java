@@ -15,6 +15,13 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.junit4.SpringRunner;
 
+// using RestTemplate
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.web.client.RestClientResponseException;
+import org.springframework.web.client.RestTemplate;
+//
+
 import javax.annotation.Resource;
 
 @ImportResource(locations = "classpath*:/spring-mybatis.xml")
