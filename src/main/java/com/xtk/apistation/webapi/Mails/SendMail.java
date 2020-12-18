@@ -17,7 +17,7 @@ public class SendMail {
 
     private JavaMailSender mailSender;
     // ************
-    private static String[] emailto = {"zhaoyuheng@setechchina.com", "yuhengzhao29@hotmail.com"};
+    private static String[] emailto = {"zhaoyuheng@setechchina.com", "fahuo_nd@setechchina.com"};
     // ************
 //    private static String subject = "PMS申请通过提醒";
 
