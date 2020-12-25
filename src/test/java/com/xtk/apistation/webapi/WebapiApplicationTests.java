@@ -79,7 +79,8 @@ public class WebapiApplicationTests {
     @Test
     public void tstSimpleMail(){
         EmailActionService emailActionService = new EmailActionService(mailSender, sendName);
-//        emailActionService.sendSimpleMsg("sts201", {"zhaoyuheng@setechchina.com", "ss"}, "zhuti");
+        String[] mailAddr = {"zhaoyuheng@setechchina.com"};
+//        emailActionService.sendSimpleMsg("sts201", mailAddr,  "zhuti");
     }
 
 }

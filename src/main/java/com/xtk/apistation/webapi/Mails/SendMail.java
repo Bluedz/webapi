@@ -25,7 +25,7 @@ public class SendMail {
         JavaMailSenderImpl javaMailSenderImpl = new JavaMailSenderImpl();
         javaMailSenderImpl.setPort(25);
         javaMailSenderImpl.setUsername("saic_pms_remind@setechchina.com");
-        javaMailSenderImpl.setPassword("1234@pms12");
+        javaMailSenderImpl.setPassword("ab12@pms20");
         javaMailSenderImpl.setHost("smtp.setechchina.com");
         JavaMailSender javaMailSender = javaMailSenderImpl;
         this.mailSender = javaMailSender;
