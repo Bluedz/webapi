@@ -10,9 +10,9 @@
     <result column="DESC_SPEC" jdbcType="VARCHAR" property="descSpec" />
     <result column="OG_SPEC" jdbcType="VARCHAR" property="ogSpec" />
     <result column="MFR" jdbcType="VARCHAR" property="mfr" />
-    <result column="MFR _NO" jdbcType="VARCHAR" property="mfrNo" />
-    <result column="EQUIP_ MFR" jdbcType="VARCHAR" property="equipMfr" />
-    <result column="EQUIP_ MFR_NO" jdbcType="VARCHAR" property="equipMfrNo" />
+    <result column="MFR_NO" jdbcType="VARCHAR" property="mfrNo" />
+    <result column="EQUIP_MFR" jdbcType="VARCHAR" property="equipMfr" />
+    <result column="EQUIP_MFR_NO" jdbcType="VARCHAR" property="equipMfrNo" />
     <result column="EQUIP_NO" jdbcType="VARCHAR" property="equipNo" />
     <result column="DIAGRAM_NO" jdbcType="VARCHAR" property="diagramNo" />
     <result column="PROD_CODE_DESC" jdbcType="VARCHAR" property="prodCodeDesc" />
